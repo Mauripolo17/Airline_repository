@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "Clientes")
 @Entity
-
-
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

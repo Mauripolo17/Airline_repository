@@ -8,11 +8,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Clientes")
+@Table(name = "Pasajeros")
 @Entity
-public class Reserva {
+public class Pasajero {
 
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+
+
 }
