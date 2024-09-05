@@ -1,4 +1,4 @@
-package entities;
+package com.airline.airline.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,17 +7,18 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "pasajeros")
+@Table(name = "clientes")
 @Entity
-public class Pasajero {
-
-
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+public class Cliente {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @Column(nullable = false)
     private String nombre;
 
@@ -25,16 +26,18 @@ public class Pasajero {
     private String apellido;
 
     @Column(nullable = false)
-    private String tipoDocumento;
+    private String direccion;
 
     @Column(nullable = false)
-    private int numeroDocumento;
+    private int telefono;
+
+    @Column(nullable = false)
+    private String correoElectronico;
 
     @Column(nullable = false) @Temporal(TemporalType.TIMESTAMP) @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaDeNacimiento;
 
-    @ManyToOne(targetEntity = Reserva.class)
-    private Reserva reserva;
-
+    @OneToMany(targetEntity = Reserva.class ,mappedBy = "cliente", fetch = FetchType.LAZY)
+    private Set<Reserva> reservas;
 
 }
