@@ -8,13 +8,26 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Pasajeros")
+@Table(name = "pasajeros")
 @Entity
 public class Pasajero {
 
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(nullable = false)
+    private String nombre;
+
+    @Column(nullable = false)
+    private String apellido;
+
+    @Column(nullable = false)
+    private String tipoDocumento;
+
+    @Column(nullable = false)
+    private int numeroDocumento;
+
 
 
 
