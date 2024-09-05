@@ -3,6 +3,8 @@ package com.airline.airline.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,4 +23,7 @@ public class Aeropuerto {
 
     @Column(nullable = false)
     private String pais;
+
+    @OneToMany(targetEntity = Vuelo.class, mappedBy = "aeropuerto", fetch = FetchType.LAZY)
+    private Set<Vuelo> vuelos;
 }

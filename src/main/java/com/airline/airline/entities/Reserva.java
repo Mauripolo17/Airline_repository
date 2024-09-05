@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 
@@ -27,5 +29,12 @@ public class Reserva {
 
     @OneToMany(targetEntity = Pasajero.class, mappedBy = "reserva", fetch = FetchType.LAZY)
     private Set<Pasajero> pasajeros;
+
+    @ManyToMany
+    @JoinTable(name = "RUTAS",
+    joinColumns = @JoinColumn(name = "RESERVAS_ID", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "VUELOS_ID", referencedColumnName = "id")
+    )
+    private List<Vuelo> vuelos = new ArrayList<>();
 
 }

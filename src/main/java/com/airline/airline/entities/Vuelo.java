@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -37,6 +38,16 @@ public class Vuelo {
 
     @Column(nullable = false)
     private int capacidad;
+
+    @ManyToOne(targetEntity = Aerolinea.class)
+    private Aerolinea aerolinea;
+
+    @ManyToOne(targetEntity = Aeropuerto.class)
+    private Aeropuerto aeropuerto;
+
+    @ManyToMany(mappedBy = "vuelos")
+    private Set<Reserva> reservas;
+
 
 
 }
