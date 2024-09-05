@@ -39,10 +39,10 @@ public class Vuelo {
     @Column(nullable = false)
     private int capacidad;
 
-    @ManyToOne(targetEntity = Aerolinea.class)
+    @ManyToOne(targetEntity = Aerolinea.class, fetch = FetchType.LAZY)
     private Aerolinea aerolinea;
 
-    @ManyToOne(targetEntity = Aeropuerto.class)
+    @ManyToOne(targetEntity = Aeropuerto.class, fetch = FetchType.LAZY)
     private Aeropuerto aeropuerto;
 
     @ManyToMany(mappedBy = "vuelos")

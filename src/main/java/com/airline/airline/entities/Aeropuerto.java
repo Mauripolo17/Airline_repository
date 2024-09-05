@@ -24,6 +24,6 @@ public class Aeropuerto {
     @Column(nullable = false)
     private String pais;
 
-    @OneToMany(targetEntity = Vuelo.class, mappedBy = "aeropuerto", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "aeropuerto", fetch = FetchType.LAZY)
     private Set<Vuelo> vuelos;
 }
