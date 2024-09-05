@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.Set;
 
 
 @Data
@@ -21,6 +22,10 @@ public class Reserva {
     @Column(nullable = false) @Temporal(TemporalType.TIMESTAMP) @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaReserva;
 
+    @ManyToOne(targetEntity = Cliente.class)
+    private Cliente cliente;
 
+    @OneToMany(targetEntity = Pasajero.class, mappedBy = "reserva", fetch = FetchType.LAZY)
+    private Set<Pasajero> pasajeros;
 
 }

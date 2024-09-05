@@ -3,13 +3,11 @@ package entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter
-@Setter
-@Entity
-@Table(name = "aerolineas")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@Entity
+@Table(name = "aerolineas")
 public class Aerolinea {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
