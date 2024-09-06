@@ -35,6 +35,6 @@ public class Reserva {
     joinColumns = @JoinColumn(name = "RESERVAS_ID", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "VUELOS_ID", referencedColumnName = "id")
     )
-    private List<Vuelo> vuelos = new ArrayList<>();
+    private Set<Vuelo> vuelos;
 
 }
