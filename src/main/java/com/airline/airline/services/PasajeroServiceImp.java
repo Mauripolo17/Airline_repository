@@ -36,4 +36,9 @@ public class PasajeroServiceImp implements PasajeroService {
     public Optional<Pasajero> actualizarPasajero(Long id, Pasajero pasajero) {
         return Optional.empty();
     }
+
+    @Override
+    public List<Pasajero> findPasajeroByReserva(Long id) {
+        return List.of();
+    }
 }

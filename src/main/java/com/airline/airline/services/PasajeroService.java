@@ -18,4 +18,6 @@ public interface PasajeroService {
     List<Pasajero> listarPasajeros();
 
     Optional<Pasajero> actualizarPasajero(Long id, Pasajero pasajero);
+
+    List<Pasajero> findPasajeroByReserva(Long id);
 }
