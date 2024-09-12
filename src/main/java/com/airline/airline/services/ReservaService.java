@@ -10,17 +10,17 @@ import java.util.Optional;
 
 public interface ReservaService {
 
-    Optional<Reserva> findById(String id);
+    Optional<Reserva> findById(Long id);
 
     List<Reserva> findAll();
 
     Reserva updateReserva(Long id, Reserva reserva);
 
-    void deleteReserva(String id);
+    void deleteReserva(Long id);
 
-    Optional<Reserva> findReservaByFlightId(String id);
+    Optional<Reserva> findReservaByFlightId(Long id);
 
-    Optional<Reserva> findReservaByAirlineId(String id);
+    Optional<Reserva> findReservaByAirlineId(Long id);
 
     Reserva saveReserva(Reserva reserva);
 
