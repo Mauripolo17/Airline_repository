@@ -14,7 +14,7 @@ public interface VueloService {
 
     void saveVuelo(Vuelo vuelo);
 
-    void updateVuelo(Vuelo vuelo);
+    Optional<Vuelo> updateVuelo(Long id, Vuelo vuelo);
 
     void deleteVuelo(Long id);
 

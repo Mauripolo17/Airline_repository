@@ -16,29 +16,28 @@ public class ClienteServiceImp implements ClienteService {
 
     @Override
     public Optional<Cliente> findById(Long id) {
-        Optional<Cliente> cliente = clienteRepository.findById(id);
-        return cliente;
+        return clienteRepository.findById(id);
     }
 
     @Override
     public Optional<Cliente> findByEmail(String email) {
-        return Optional.empty();
+        return clienteRepository.findByEmail(email);
     }
 
     @Override
     public Optional<Cliente> findByNombre(String nombre) {
-        return Optional.empty();
+        return clienteRepository.findByNombre(nombre);
     }
 
     @Override
     public void saveCliente(Cliente cliente) {
-
+        clienteRepository.save(cliente);
     }
 
 
     @Override
     public void deleteCliente(Long id) {
-
+        clienteRepository.deleteById(id);
     }
 
     @Override

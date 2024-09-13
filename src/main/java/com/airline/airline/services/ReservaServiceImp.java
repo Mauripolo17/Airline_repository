@@ -1,7 +1,6 @@
 package com.airline.airline.services;
 
 import com.airline.airline.entities.Reserva;
-import com.airline.airline.entities.Vuelo;
 import com.airline.airline.repositories.ReservaRepository;
 
 import java.util.List;
@@ -12,50 +11,55 @@ public class ReservaServiceImp implements ReservaService {
     private final ReservaRepository reservaRepository;
 
     public ReservaServiceImp(ReservaRepository reservaRepository) {
+
         this.reservaRepository = reservaRepository;
     }
 
     @Override
     public Optional<Reserva> findById(Long id) {
-        return Optional.empty();
+        return reservaRepository.findById(id);
     }
 
     @Override
     public List<Reserva> findAll() {
-        return List.of();
+        return reservaRepository.findAll();
     }
 
-    @Override
-    public void updateReserva(Reserva reserva) {
 
+
+    public Optional<Reserva> updateReserva(Long id, Reserva reserva) {
+        return reservaRepository.findById(id).map(reservaInBD->{
+            reservaInBD.setCliente(reserva.getCliente());
+            reservaInBD.setFechaReserva(reserva.getFechaReserva());
+            reservaInBD.setPasajeros(reserva.getPasajeros());
+            reservaInBD.setVuelos(reserva.getVuelos());
+
+            return reservaRepository.save(reservaInBD);
+        });
     }
 
 
     @Override
     public void deleteReserva(Long id) {
-
+        reservaRepository.deleteById(id);
     }
 
     @Override
     public Optional<Reserva> findByFlightId(Long id) {
-        return Optional.empty();
+        return reservaRepository.findByFlightId(id);
     }
 
     @Override
     public Optional<Reserva> findByAirlineId(Long id) {
-        return Optional.empty();
+        return reservaRepository.findByAirlineId(id);
     }
 
 
     @Override
     public void saveReserva(Reserva reserva) {
-
+        reservaRepository.save(reserva);
     }
 
-    @Override
-    public Optional<Reserva> findByReserva(Long id) {
-        return Optional.empty();
-    }
 
 
 }

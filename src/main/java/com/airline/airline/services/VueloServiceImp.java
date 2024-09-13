@@ -17,25 +17,35 @@ public class VueloServiceImp implements VueloService {
 
     @Override
     public Optional<Vuelo> findById(Long id) {
-        return Optional.empty();
+        return vueloRepository.findById(id);
     }
 
     @Override
     public List<Vuelo> findAll() {
-        return List.of();
+        return vueloRepository.findAll();
     }
 
     @Override
     public void saveVuelo(Vuelo vuelo) {
-
+        vueloRepository.save(vuelo);
     }
     @Override
-    public void updateVuelo(Vuelo vuelo) {
+    public Optional<Vuelo> updateVuelo(Long id, Vuelo vuelo) {
+        return vueloRepository.findById(id).map(vueloInBD->{
+            vueloInBD.setCapacidad(vuelo.getCapacidad());
+            vueloInBD.setDestino(vuelo.getDestino());
+            vueloInBD.setOrigen(vuelo.getOrigen());
+            vueloInBD.setFechaDeSalida(vuelo.getFechaDeSalida());
+            vueloInBD.setHoraDeSalida(vuelo.getHoraDeSalida());
+            vueloInBD.setDuracion(vuelo.getDuracion());
+            vueloInBD.setReservas(vuelo.getReservas());
 
+            return vueloRepository.save(vueloInBD);
+        });
     }
     @Override
     public void deleteVuelo(Long id) {
-
+        vueloRepository.deleteById(id);
     }
     @Override
     public List<Reserva> findByVuelo(Long id) {

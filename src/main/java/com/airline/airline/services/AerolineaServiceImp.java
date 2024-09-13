@@ -17,17 +17,17 @@ public class AerolineaServiceImp implements AerolineaService {
 
     @Override
     public Optional<Aerolinea> findById(long id) {
-        return Optional.empty();
+        return aerolineaRepository.findById(id);
     }
 
     @Override
     public Optional<Aerolinea> findByName(String name) {
-        return Optional.empty();
+        return aerolineaRepository.findByName(name);
     }
 
     @Override
     public void save(Aerolinea aerolinea) {
-
+        aerolineaRepository.save(aerolinea);
     }
 
     @Override

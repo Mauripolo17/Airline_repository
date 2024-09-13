@@ -1,6 +1,5 @@
 package com.airline.airline.services;
 
-import ch.qos.logback.core.pattern.parser.OptionTokenizer;
 import com.airline.airline.entities.Aeropuerto;
 
 import java.util.List;
@@ -16,7 +15,7 @@ public interface AeropuertoService {
 
     void save(Aeropuerto aeropuerto);
 
-    void update(Aeropuerto aeropuerto);
+    Optional<Aeropuerto> update(Long id, Aeropuerto aeropuerto);
 
     void delete(Long id);
 

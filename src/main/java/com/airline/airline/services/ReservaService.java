@@ -14,7 +14,7 @@ public interface ReservaService {
 
     List<Reserva> findAll();
 
-    void updateReserva(Reserva reserva);
+    Optional<Reserva> updateReserva(Long id, Reserva reserva);
 
     void deleteReserva(Long id);
 
@@ -22,7 +22,6 @@ public interface ReservaService {
 
     Optional<Reserva> findByAirlineId(Long id);
 
-    Optional<Reserva> findByReserva(Long id);
 
     void saveReserva(Reserva reserva);
 

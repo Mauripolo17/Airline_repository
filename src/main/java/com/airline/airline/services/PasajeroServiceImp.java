@@ -17,32 +17,32 @@ public class PasajeroServiceImp implements PasajeroService {
 
     @Override
     public Optional<Pasajero> findByName(String nombre) {
-        return Optional.empty();
+        return pasajeroRepository.findByName(nombre);
     }
 
     @Override
     public Optional<Pasajero> findById(Long id) {
-        return Optional.empty();
+        return pasajeroRepository.findById(id);
     }
 
     @Override
     public Optional<Pasajero> findByReserva(Long id) {
-        return Optional.empty();
+        return pasajeroRepository.findByReserva(id);
     }
 
     @Override
     public void savePasajero(Pasajero pasajero) {
-
+        pasajeroRepository.save(pasajero);
     }
 
     @Override
     public void deletePasajero(Long id) {
-
+        pasajeroRepository.deleteById(id);
     }
 
     @Override
     public List<Pasajero> findAll() {
-        return null;
+        return pasajeroRepository.findAll();
     }
 
     @Override

@@ -17,14 +17,12 @@ public class AeropuertoServiceImp implements AeropuertoService {
 
     @Override
     public Optional<Aeropuerto> findByName(String name) {
-        Optional<Aeropuerto> aeroPuerto = findByName(name);
-        return aeroPuerto;
+        return aeropuertoRepository.findByName(name);
     }
 
     @Override
     public Optional<Aeropuerto> findById(Long id) {
-        Optional<Aeropuerto> aeroPuerto = findById(id);
-        return aeroPuerto;
+        return aeropuertoRepository.findById(id);
     }
 
     @Override
@@ -38,8 +36,16 @@ public class AeropuertoServiceImp implements AeropuertoService {
     }
 
     @Override
-    public void update(Aeropuerto aeropuerto) {
-        aeropuertoRepository.save(aeropuerto);
+    public Optional<Aeropuerto> update(Long id, Aeropuerto newAeropuerto) {
+        return aeropuertoRepository.findById(id).
+                map(aeropuertoInBD-> {
+                    aeropuertoInBD.setNombre(newAeropuerto.getNombre());
+                    aeropuertoInBD.setCiudad(newAeropuerto.getCiudad());
+                    aeropuertoInBD.setPais(newAeropuerto.getPais());
+                    aeropuertoInBD.setVuelos(newAeropuerto.getVuelos());
+
+                    return aeropuertoRepository.save(aeropuertoInBD);
+                });
     }
 
     @Override
