@@ -1,13 +1,22 @@
 package com.airline.airline.services;
 
 import com.airline.airline.entities.Aerolinea;
+import com.airline.airline.repositories.AerolineaRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 public class AerolineaServiceImp implements AerolineaService {
+
+    private final AerolineaRepository AerolineaRepository;
+    public AerolineaServiceImp(com.airline.airline.repositories.AerolineaRepository aerolineaRepository) {
+        AerolineaRepository = aerolineaRepository;
+    }
+
+
     @Override
     public Optional<Aerolinea> findById(long id) {
+        Optional<Aerolinea>
         return Optional.empty();
     }
 

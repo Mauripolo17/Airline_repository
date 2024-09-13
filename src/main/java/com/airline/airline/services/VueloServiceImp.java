@@ -2,11 +2,19 @@ package com.airline.airline.services;
 
 import com.airline.airline.entities.Reserva;
 import com.airline.airline.entities.Vuelo;
+import com.airline.airline.repositories.VueloRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 public class VueloServiceImp implements VueloService {
+
+    private final VueloRepository vueloRepository;
+
+    public VueloServiceImp(VueloRepository vueloRepository) {
+        this.vueloRepository = vueloRepository;
+    }
+
     @Override
     public Optional<Vuelo> findById(Long id) {
         return Optional.empty();

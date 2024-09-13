@@ -1,11 +1,18 @@
 package com.airline.airline.services;
 
 import com.airline.airline.entities.Pasajero;
+import com.airline.airline.repositories.PasajeroRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 public class PasajeroServiceImp implements PasajeroService {
+
+    private final PasajeroRepository pasajeroRepository;
+
+    public PasajeroServiceImp(PasajeroRepository pasajeroRepository) {
+        this.pasajeroRepository = pasajeroRepository;
+    }
 
     @Override
     public Optional<Pasajero> buscarPasajeroPorNombre(String nombre) {

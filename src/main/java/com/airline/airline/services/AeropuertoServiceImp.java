@@ -1,11 +1,19 @@
 package com.airline.airline.services;
 
 import com.airline.airline.entities.Aeropuerto;
+import com.airline.airline.repositories.AeropuertoRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 public class AeropuertoServiceImp implements AeropuertoService {
+
+    private final AeropuertoRepository aeropuertoRepository;
+
+    public AeropuertoServiceImp(AeropuertoRepository aeropuertoRepository) {
+        this.aeropuertoRepository = aeropuertoRepository;
+    }
+
     @Override
     public Optional<Aeropuerto> buscarAeropuertoPorNombre(String nombre) {
         return Optional.empty();
