@@ -31,7 +31,7 @@ public class PasajeroServiceImp implements PasajeroService {
 
     @Override
     public void eliminarPasajero(Long id) {
-
+        pasajeroRepository.deleteById(id);
     }
 
     @Override
@@ -40,8 +40,17 @@ public class PasajeroServiceImp implements PasajeroService {
     }
 
     @Override
-    public Optional<Pasajero> actualizarPasajero(Long id, Pasajero pasajero) {
-        return Optional.empty();
+    public Optional<Pasajero> actualizarPasajero(Long id, Pasajero newPasajero) {
+        return pasajeroRepository.findById(id).
+                map(pasajeroInBD-> {
+                    pasajeroInBD.setNombre(newPasajero.getNombre());
+                    pasajeroInBD.setApellido(newPasajero.getApellido());
+                    pasajeroInBD.setFechaDeNacimiento(newPasajero.getFechaDeNacimiento());
+                    pasajeroInBD.setTipoDocumento(newPasajero.getTipoDocumento());
+                    pasajeroInBD.setNumeroDocumento(newPasajero.getNumeroDocumento());
+
+                    return pasajeroRepository.save(pasajeroInBD);
+                });
     }
 
     @Override
