@@ -16,7 +16,7 @@ public class AerolineaServiceImp implements AerolineaService {
 
 
     @Override
-    public Optional<Aerolinea> findById(long id) {
+    public Optional<Aerolinea> findById(Long id) {
         return aerolineaRepository.findById(id);
     }
 

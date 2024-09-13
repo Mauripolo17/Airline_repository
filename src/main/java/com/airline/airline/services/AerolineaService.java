@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface AerolineaService {
 
-    Optional<Aerolinea> findById(long id);
+    Optional<Aerolinea> findById(Long id);
 
     Optional<Aerolinea> findByName(String name);
 

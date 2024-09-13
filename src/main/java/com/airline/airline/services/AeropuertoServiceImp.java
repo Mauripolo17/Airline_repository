@@ -27,11 +27,13 @@ public class AeropuertoServiceImp implements AeropuertoService {
 
     @Override
     public List<Aeropuerto> findAll() {
+
         return aeropuertoRepository.findAll();
     }
 
     @Override
     public void save(Aeropuerto aeropuerto) {
+
         aeropuertoRepository.save(aeropuerto);
     }
 
@@ -50,6 +52,7 @@ public class AeropuertoServiceImp implements AeropuertoService {
 
     @Override
     public void delete(Long id) {
+
         aeropuertoRepository.deleteById(id);
     }
 }
