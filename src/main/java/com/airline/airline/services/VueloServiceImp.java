@@ -26,27 +26,26 @@ public class VueloServiceImp implements VueloService {
     }
 
     @Override
-    public Vuelo saveVuelo(Vuelo vuelo) {
-        return null;
-    }
+    public void saveVuelo(Vuelo vuelo) {
 
+    }
     @Override
-    public Optional<Vuelo> updateVuelo(Long id, Vuelo vuelo) {
-        return Optional.empty();
-    }
+    public void updateVuelo(Vuelo vuelo) {
 
+    }
     @Override
     public void deleteVuelo(Long id) {
 
     }
-
     @Override
     public List<Reserva> findByVuelo(Long id) {
         return List.of();
     }
 
     @Override
-    public Optional<Vuelo> findByVueloAndReserva(Long id, Reserva reserva) {
+    public Optional<Vuelo> findByReserva(Long id, Reserva reserva) {
         return Optional.empty();
     }
+
+
 }

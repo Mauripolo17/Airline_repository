@@ -14,16 +14,18 @@ public interface ReservaService {
 
     List<Reserva> findAll();
 
-    Reserva updateReserva(Long id, Reserva reserva);
+    void updateReserva(Reserva reserva);
 
     void deleteReserva(Long id);
 
-    Optional<Reserva> findReservaByFlightId(Long id);
+    Optional<Reserva> findByFlightId(Long id);
 
-    Optional<Reserva> findReservaByAirlineId(Long id);
+    Optional<Reserva> findByAirlineId(Long id);
 
-    Reserva saveReserva(Reserva reserva);
+    Optional<Reserva> findByReserva(Long id);
 
-    List<Vuelo> findVueloByReserva(Long id);
+    void saveReserva(Reserva reserva);
+
+
 
 }

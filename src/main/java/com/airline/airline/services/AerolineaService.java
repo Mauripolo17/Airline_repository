@@ -12,9 +12,7 @@ public interface AerolineaService {
 
     Optional<Aerolinea> findByName(String name);
 
-    List<Aerolinea> findAll();
-
-    Optional<Aerolinea> save(Aerolinea aerolinea);
+    void save(Aerolinea aerolinea);
 
     void delete(Long id);
 

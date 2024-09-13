@@ -12,15 +12,15 @@ public interface VueloService {
 
     List<Vuelo> findAll();
 
-    Vuelo saveVuelo(Vuelo vuelo);
+    void saveVuelo(Vuelo vuelo);
 
-    Optional<Vuelo> updateVuelo(Long id, Vuelo vuelo);
+    void updateVuelo(Vuelo vuelo);
 
     void deleteVuelo(Long id);
 
     List<Reserva> findByVuelo(Long id);
 
-    Optional<Vuelo> findByVueloAndReserva(Long id, Reserva reserva);
+    Optional<Vuelo> findByReserva(Long id, Reserva reserva);
 
 
 }

@@ -7,17 +7,19 @@ import java.util.Optional;
 
 public interface PasajeroService {
 
-    Optional<Pasajero> buscarPasajeroPorNombre(String nombre);
+    Optional<Pasajero> findByName(String nombre);
 
-    Optional<Pasajero> buscarPasajeroPorId(Long id);
+    Optional<Pasajero> findById(Long id);
 
-    Pasajero guardarPasajero(Pasajero pasajero);
+    Optional<Pasajero> findByReserva(Long id);
 
-    void eliminarPasajero(Long id);
+    void savePasajero(Pasajero pasajero);
 
-    List<Pasajero> listarPasajeros();
+    void deletePasajero(Long id);
 
-    Optional<Pasajero> actualizarPasajero(Long id, Pasajero pasajero);
+    List<Pasajero> findAll();
 
-    List<Pasajero> findPasajeroByReserva(Long id);
+    Optional<Pasajero> updatePasajero(Long id, Pasajero pasajero);
+
+
 }

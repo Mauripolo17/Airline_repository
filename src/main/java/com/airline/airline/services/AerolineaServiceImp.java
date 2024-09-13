@@ -26,13 +26,8 @@ public class AerolineaServiceImp implements AerolineaService {
     }
 
     @Override
-    public List<Aerolinea> findAll() {
-        return List.of();
-    }
+    public void save(Aerolinea aerolinea) {
 
-    @Override
-    public Optional<Aerolinea> save(Aerolinea aerolinea) {
-        return Optional.empty();
     }
 
     @Override

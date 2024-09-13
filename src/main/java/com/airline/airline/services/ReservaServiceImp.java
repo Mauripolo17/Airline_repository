@@ -26,9 +26,10 @@ public class ReservaServiceImp implements ReservaService {
     }
 
     @Override
-    public Reserva updateReserva(Long id, Reserva reserva) {
-        return null;
+    public void updateReserva(Reserva reserva) {
+
     }
+
 
     @Override
     public void deleteReserva(Long id) {
@@ -36,22 +37,25 @@ public class ReservaServiceImp implements ReservaService {
     }
 
     @Override
-    public Optional<Reserva> findReservaByFlightId(Long id) {
+    public Optional<Reserva> findByFlightId(Long id) {
         return Optional.empty();
     }
 
     @Override
-    public Optional<Reserva> findReservaByAirlineId(Long id) {
+    public Optional<Reserva> findByAirlineId(Long id) {
         return Optional.empty();
     }
 
+
     @Override
-    public Reserva saveReserva(Reserva reserva) {
-        return null;
+    public void saveReserva(Reserva reserva) {
+
     }
 
     @Override
-    public List<Vuelo> findVueloByReserva(Long id) {
-        return List.of();
+    public Optional<Reserva> findByReserva(Long id) {
+        return Optional.empty();
     }
+
+
 }

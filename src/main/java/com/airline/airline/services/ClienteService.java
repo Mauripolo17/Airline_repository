@@ -13,11 +13,9 @@ public interface ClienteService {
 
     Optional<Cliente>  findByNombre(String nombre);
 
-    Cliente saveCliente(Cliente cliente);
+    void saveCliente(Cliente cliente);
 
     void deleteCliente(Long id);
 
-    Optional<Cliente> updateCliente(Long id, Cliente cliente);
-
-    List<Cliente> findAllCliente();
+    void updateCliente(Cliente cliente);
 }

@@ -14,33 +14,39 @@ public class PasajeroServiceImp implements PasajeroService {
         this.pasajeroRepository = pasajeroRepository;
     }
 
+
     @Override
-    public Optional<Pasajero> buscarPasajeroPorNombre(String nombre) {
+    public Optional<Pasajero> findByName(String nombre) {
         return Optional.empty();
     }
 
     @Override
-    public Optional<Pasajero> buscarPasajeroPorId(Long id) {
+    public Optional<Pasajero> findById(Long id) {
         return Optional.empty();
     }
 
     @Override
-    public Pasajero guardarPasajero(Pasajero pasajero) {
+    public Optional<Pasajero> findByReserva(Long id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public void savePasajero(Pasajero pasajero) {
+
+    }
+
+    @Override
+    public void deletePasajero(Long id) {
+
+    }
+
+    @Override
+    public List<Pasajero> findAll() {
         return null;
     }
 
     @Override
-    public void eliminarPasajero(Long id) {
-        pasajeroRepository.deleteById(id);
-    }
-
-    @Override
-    public List<Pasajero> listarPasajeros() {
-        return List.of();
-    }
-
-    @Override
-    public Optional<Pasajero> actualizarPasajero(Long id, Pasajero newPasajero) {
+    public Optional<Pasajero> updatePasajero(Long id, Pasajero newPasajero) {
         return pasajeroRepository.findById(id).
                 map(pasajeroInBD-> {
                     pasajeroInBD.setNombre(newPasajero.getNombre());
@@ -53,8 +59,4 @@ public class PasajeroServiceImp implements PasajeroService {
                 });
     }
 
-    @Override
-    public List<Pasajero> findPasajeroByReserva(Long id) {
-        return List.of();
-    }
 }

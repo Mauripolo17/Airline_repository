@@ -14,33 +14,36 @@ public class AeropuertoServiceImp implements AeropuertoService {
         this.aeropuertoRepository = aeropuertoRepository;
     }
 
+
     @Override
-    public Optional<Aeropuerto> buscarAeropuertoPorNombre(String nombre) {
-        return Optional.empty();
+    public Optional<Aeropuerto> findByName(String name) {
+        Optional<Aeropuerto> aeroPuerto = findByName(name);
+        return aeroPuerto;
     }
 
     @Override
-    public Optional<Aeropuerto> buscarAeropuertoPorId(Long id) {
-        return Optional.empty();
+    public Optional<Aeropuerto> findById(Long id) {
+        Optional<Aeropuerto> aeroPuerto = findById(id);
+        return aeroPuerto;
     }
 
     @Override
-    public List<Aeropuerto> listarAeropuertos() {
-        return List.of();
+    public List<Aeropuerto> findAll() {
+        return aeropuertoRepository.findAll();
     }
 
     @Override
-    public Aeropuerto guardarAeropuerto(Aeropuerto aeropuerto) {
-        return null;
+    public void save(Aeropuerto aeropuerto) {
+        aeropuertoRepository.save(aeropuerto);
     }
 
     @Override
-    public Optional<Aeropuerto> actualizarAeropuerto(Long id, Aeropuerto actual) {
-        return Optional.empty();
+    public void update(Aeropuerto aeropuerto) {
+        aeropuertoRepository.save(aeropuerto);
     }
 
     @Override
-    public void eliminarAeropuerto(Long id) {
-
+    public void delete(Long id) {
+        aeropuertoRepository.deleteById(id);
     }
 }

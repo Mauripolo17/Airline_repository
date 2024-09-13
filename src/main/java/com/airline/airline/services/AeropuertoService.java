@@ -8,17 +8,16 @@ import java.util.Optional;
 
 public interface AeropuertoService {
 
-    Optional<Aeropuerto> buscarAeropuertoPorNombre(String nombre);
+    Optional<Aeropuerto> findByName(String name);
 
-    Optional<Aeropuerto> buscarAeropuertoPorId(Long id);
+    Optional<Aeropuerto> findById(Long id);
 
-    List<Aeropuerto> listarAeropuertos();
+    List<Aeropuerto> findAll();
 
-    Aeropuerto guardarAeropuerto(Aeropuerto aeropuerto);
+    void save(Aeropuerto aeropuerto);
 
-    Optional<Aeropuerto> actualizarAeropuerto(Long id, Aeropuerto actual);
+    void update(Aeropuerto aeropuerto);
 
-    void eliminarAeropuerto(Long id);
-
+    void delete(Long id);
 
 }
