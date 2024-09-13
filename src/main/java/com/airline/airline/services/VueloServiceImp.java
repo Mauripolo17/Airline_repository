@@ -49,13 +49,12 @@ public class VueloServiceImp implements VueloService {
     }
     @Override
     public List<Reserva> findByVuelo(Long id) {
-        return List.of();
+        return vueloRepository.findByVuelo(id);
     }
 
     @Override
     public Optional<Vuelo> findByReserva(Long id, Reserva reserva) {
-        return Optional.empty();
+        return vueloRepository.findByReserva(id);
     }
-
 
 }

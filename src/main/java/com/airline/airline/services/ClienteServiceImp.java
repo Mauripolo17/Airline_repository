@@ -41,8 +41,18 @@ public class ClienteServiceImp implements ClienteService {
     }
 
     @Override
-    public void updateCliente(Cliente cliente) {
+    public Optional<Cliente> updateCliente(Long id, Cliente cliente) {
+        return clienteRepository.findById(id).
+                map(oldCliente-> {
+                    oldCliente.setNombre(cliente.getNombre());
+                    oldCliente.setApellido(cliente.getApellido());
+                    oldCliente.setDireccion(cliente.getDireccion());
+                    oldCliente.setTelefono(cliente.getTelefono());
+                    oldCliente.setCorreoElectronico(cliente.getCorreoElectronico());
+                    oldCliente.setFechaDeNacimiento(cliente.getFechaDeNacimiento());
 
+                    return clienteRepository.save(oldCliente);
+                });
     }
 
 }

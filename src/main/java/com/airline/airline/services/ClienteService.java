@@ -17,5 +17,5 @@ public interface ClienteService {
 
     void deleteCliente(Long id);
 
-    void updateCliente(Cliente cliente);
+    Optional<Cliente> updateCliente(Long id, Cliente cliente);
 }
