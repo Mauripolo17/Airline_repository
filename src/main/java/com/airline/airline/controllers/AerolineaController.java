@@ -58,6 +58,8 @@ public class AerolineaController {
                aerolineaService.delete(id);
                return ResponseEntity.ok().body(a);
            }).orElse(ResponseEntity.notFound().build());
-        }
     }
+
+
 }
+

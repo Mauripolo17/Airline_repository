@@ -1,6 +1,5 @@
 package com.airline.airline.controllers;
 
-import com.airline.airline.entities.Aerolinea;
 import com.airline.airline.entities.Aeropuerto;
 import com.airline.airline.services.AeropuertoService;
 import org.springframework.http.ResponseEntity;
@@ -54,7 +53,12 @@ public class AeropuertoController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Aerolinea> deleteAerolinea(@PathVariable Long id) {
-
+    public ResponseEntity<Aeropuerto> deleteAeropuerto(@PathVariable Long id) {
+        return aeropuertoService.findById(id).map(a-> {
+            aeropuertoService.delete(id);
+            return ResponseEntity.ok().body(a);
+        }).orElse(ResponseEntity.notFound().build());
     }
+
 }
+

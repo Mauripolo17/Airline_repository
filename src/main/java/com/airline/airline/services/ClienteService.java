@@ -7,13 +7,15 @@ import java.util.Optional;
 
 public interface ClienteService {
 
+    List<Cliente> findAll();
+
     Optional<Cliente> findById(Long id);
 
     Optional<Cliente> findByEmail(String email);
 
     Optional<Cliente>  findByNombre(String nombre);
 
-    void saveCliente(Cliente cliente);
+    Cliente saveCliente(Cliente cliente);
 
     void deleteCliente(Long id);
 

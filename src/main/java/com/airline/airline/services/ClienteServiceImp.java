@@ -16,6 +16,11 @@ public class ClienteServiceImp implements ClienteService {
     }
 
     @Override
+    public List<Cliente> findAll() {
+        return clienteRepository.findAll();
+    }
+
+    @Override
     public Optional<Cliente> findById(Long id) {
         return clienteRepository.findById(id);
     }
@@ -31,8 +36,9 @@ public class ClienteServiceImp implements ClienteService {
     }
 
     @Override
-    public void saveCliente(Cliente cliente) {
+    public Cliente saveCliente(Cliente cliente) {
         clienteRepository.save(cliente);
+        return cliente;
     }
 
 
