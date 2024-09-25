@@ -58,8 +58,9 @@ public class ReservaServiceImp implements ReservaService {
 
 
     @Override
-    public void saveReserva(Reserva reserva) {
+    public Reserva saveReserva(Reserva reserva) {
         reservaRepository.save(reserva);
+        return reserva;
     }
 
 

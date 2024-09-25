@@ -13,7 +13,7 @@ public interface PasajeroService {
 
     Optional<Pasajero> findByReserva(Long id);
 
-    void savePasajero(Pasajero pasajero);
+    Pasajero savePasajero(Pasajero pasajero);
 
     void deletePasajero(Long id);
 

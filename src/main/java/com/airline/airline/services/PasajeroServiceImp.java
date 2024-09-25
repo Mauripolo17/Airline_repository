@@ -32,8 +32,9 @@ public class PasajeroServiceImp implements PasajeroService {
     }
 
     @Override
-    public void savePasajero(Pasajero pasajero) {
+    public Pasajero savePasajero(Pasajero pasajero) {
         pasajeroRepository.save(pasajero);
+        return pasajero;
     }
 
     @Override

@@ -12,7 +12,7 @@ public interface VueloService {
 
     List<Vuelo> findAll();
 
-    void saveVuelo(Vuelo vuelo);
+    Vuelo saveVuelo(Vuelo vuelo);
 
     Optional<Vuelo> updateVuelo(Long id, Vuelo vuelo);
 

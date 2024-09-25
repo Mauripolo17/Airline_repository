@@ -41,7 +41,7 @@ public class AeropuertoController {
     @PutMapping("/id")
     public ResponseEntity<Aeropuerto> actualizarAeropuerto(@PathVariable Long id, @RequestBody Aeropuerto aeropuerto) {
         Optional<Aeropuerto> aeropuertoUpdate = aeropuertoService.update(id, aeropuerto);
-        return aeropuertoUpdate.map(c -> ResponseEntity.ok(c)).orElseGet(() -> {
+        return aeropuertoUpdate.map(a -> ResponseEntity.ok(a)).orElseGet(() -> {
             return createAeropuerto(aeropuerto);
         });
     }

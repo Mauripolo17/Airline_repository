@@ -27,8 +27,9 @@ public class VueloServiceImp implements VueloService {
     }
 
     @Override
-    public void saveVuelo(Vuelo vuelo) {
+    public Vuelo saveVuelo(Vuelo vuelo) {
         vueloRepository.save(vuelo);
+        return vuelo;
     }
     @Override
     public Optional<Vuelo> updateVuelo(Long id, Vuelo vuelo) {
