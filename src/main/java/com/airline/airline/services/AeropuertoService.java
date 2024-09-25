@@ -13,10 +13,11 @@ public interface AeropuertoService {
 
     List<Aeropuerto> findAll();
 
-    void save(Aeropuerto aeropuerto);
+    Aeropuerto save(Aeropuerto aeropuerto);
 
     Optional<Aeropuerto> update(Long id, Aeropuerto aeropuerto);
 
     void delete(Long id);
+    List<Aeropuerto> findAll(String name);
 
 }

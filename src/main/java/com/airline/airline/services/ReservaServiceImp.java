@@ -2,10 +2,11 @@ package com.airline.airline.services;
 
 import com.airline.airline.entities.Reserva;
 import com.airline.airline.repositories.ReservaRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class ReservaServiceImp implements ReservaService {
 
     private final ReservaRepository reservaRepository;

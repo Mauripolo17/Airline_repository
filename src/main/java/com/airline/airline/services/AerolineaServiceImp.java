@@ -26,8 +26,9 @@ public class AerolineaServiceImp implements AerolineaService {
     }
 
     @Override
-    public void save(Aerolinea aerolinea) {
+    public Aerolinea save(Aerolinea aerolinea) {
         aerolineaRepository.save(aerolinea);
+        return aerolinea;
     }
 
     @Override
@@ -48,5 +49,10 @@ public class AerolineaServiceImp implements AerolineaService {
                 }
         )
 ;
+    }
+
+    @Override
+    public List<Aerolinea> findAll() {
+        return aerolineaRepository.findAll();
     }
 }

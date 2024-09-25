@@ -2,10 +2,11 @@ package com.airline.airline.services;
 
 import com.airline.airline.entities.Cliente;
 import com.airline.airline.repositories.ClienteRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class ClienteServiceImp implements ClienteService {
 
     private final ClienteRepository clienteRepository;

@@ -2,10 +2,11 @@ package com.airline.airline.services;
 
 import com.airline.airline.entities.Aeropuerto;
 import com.airline.airline.repositories.AeropuertoRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class AeropuertoServiceImp implements AeropuertoService {
 
     private final AeropuertoRepository aeropuertoRepository;
@@ -32,9 +33,10 @@ public class AeropuertoServiceImp implements AeropuertoService {
     }
 
     @Override
-    public void save(Aeropuerto aeropuerto) {
+    public Aeropuerto save(Aeropuerto aeropuerto) {
 
         aeropuertoRepository.save(aeropuerto);
+        return aeropuerto;
     }
 
     @Override
@@ -54,5 +56,10 @@ public class AeropuertoServiceImp implements AeropuertoService {
     public void delete(Long id) {
 
         aeropuertoRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Aeropuerto> findAll(String name) {
+        return aeropuertoRepository.findAll();
     }
 }

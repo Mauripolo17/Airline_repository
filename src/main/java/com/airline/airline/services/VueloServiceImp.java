@@ -3,10 +3,11 @@ package com.airline.airline.services;
 import com.airline.airline.entities.Reserva;
 import com.airline.airline.entities.Vuelo;
 import com.airline.airline.repositories.VueloRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class VueloServiceImp implements VueloService {
 
     private final VueloRepository vueloRepository;
