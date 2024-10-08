@@ -1,4 +1,4 @@
 package com.airline.airline.dto;
 
-public class PasajeroDto {
+public record AerolineaDTO() {
 }

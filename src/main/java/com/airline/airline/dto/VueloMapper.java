@@ -1,0 +1,4 @@
+package com.airline.airline.dto;
+
+public interface VueloMapper {
+}

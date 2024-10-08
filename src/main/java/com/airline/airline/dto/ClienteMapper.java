@@ -1,4 +1,4 @@
 package com.airline.airline.dto;
 
-public class ReservaDto {
+public interface ClienteMapper {
 }

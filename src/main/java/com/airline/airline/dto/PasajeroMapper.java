@@ -1,4 +1,4 @@
 package com.airline.airline.dto;
 
-public class VueloDto {
+public interface PasajeroMapper {
 }
