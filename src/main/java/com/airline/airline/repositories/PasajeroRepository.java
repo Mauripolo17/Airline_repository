@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface PasajeroRepository extends JpaRepository<Pasajero, Long> {
-    Optional<Pasajero> findByReserva(Long id);
-    Optional<Pasajero> findByName(String nombre);
+    Optional<Pasajero> findByReserva_Id(Long id);
+    Optional<Pasajero> findByNombre(String nombre);
 }

@@ -27,7 +27,7 @@ public class ClienteServiceImp implements ClienteService {
 
     @Override
     public Optional<Cliente> findByEmail(String email) {
-        return clienteRepository.findByEmail(email);
+        return clienteRepository.findByCorreoElectronico(email);
     }
 
     @Override

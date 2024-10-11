@@ -8,10 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface ReservaRepository extends JpaRepository<Reserva, Long> {
-    Optional<Reserva> findByFlightId(Long id);
+    Optional<Reserva> findByVuelos_Id(Long id);
 
-    Optional<Reserva> findByAirlineId(Long id);
-
-    Optional<Reserva> findByReserva(Long id);
 
 }

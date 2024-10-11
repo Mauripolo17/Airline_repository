@@ -18,7 +18,7 @@ public class PasajeroServiceImp implements PasajeroService {
 
     @Override
     public Optional<Pasajero> findByName(String nombre) {
-        return pasajeroRepository.findByName(nombre);
+        return pasajeroRepository.findByNombre(nombre);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class PasajeroServiceImp implements PasajeroService {
 
     @Override
     public Optional<Pasajero> findByReserva(Long id) {
-        return pasajeroRepository.findByReserva(id);
+        return pasajeroRepository.findByReserva_Id(id);
     }
 
     @Override

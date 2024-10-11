@@ -6,4 +6,5 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface AeropuertoMapper {
     AeropuertoDTO toDTO(Aeropuerto aeropuerto);
+    Aeropuerto toEntity(AeropuertoDTO aeropuertoDTO);
 }
