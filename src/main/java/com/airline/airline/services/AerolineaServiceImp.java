@@ -10,7 +10,7 @@ import java.util.Optional;
 public class AerolineaServiceImp implements AerolineaService {
 
     private final AerolineaRepository aerolineaRepository;
-    public AerolineaServiceImp(com.airline.airline.repositories.AerolineaRepository aerolineaRepository) {
+    public AerolineaServiceImp(AerolineaRepository aerolineaRepository) {
         this.aerolineaRepository = aerolineaRepository;
     }
 
@@ -22,7 +22,7 @@ public class AerolineaServiceImp implements AerolineaService {
 
     @Override
     public Optional<Aerolinea> findByName(String name) {
-        return aerolineaRepository.findByName(name);
+        return aerolineaRepository.findByNombre(name);
     }
 
     @Override

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/reservas")
 public class ReservaController {
     private final ReservaService reservaService;
 

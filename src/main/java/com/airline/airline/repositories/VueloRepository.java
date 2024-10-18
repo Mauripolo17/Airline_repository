@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface VueloRepository extends JpaRepository<Vuelo, Long> {
-    List<Reserva> findByVuelo(Long id);
+    List<Reserva> findReservasById(Long id);
 
-    Optional<Vuelo> findByReserva(Long id);
+    Optional<Vuelo> findByReservas_Id(Long id);
 }

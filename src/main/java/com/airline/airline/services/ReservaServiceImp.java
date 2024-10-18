@@ -48,14 +48,8 @@ public class ReservaServiceImp implements ReservaService {
 
     @Override
     public Optional<Reserva> findByFlightId(Long id) {
-        return reservaRepository.findByFlightId(id);
+        return reservaRepository.findByVuelos_Id(id);
     }
-
-    @Override
-    public Optional<Reserva> findByAirlineId(Long id) {
-        return reservaRepository.findByAirlineId(id);
-    }
-
 
     @Override
     public Reserva saveReserva(Reserva reserva) {

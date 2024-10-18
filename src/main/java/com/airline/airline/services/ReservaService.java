@@ -17,9 +17,6 @@ public interface ReservaService {
 
     Optional<Reserva> findByFlightId(Long id);
 
-    Optional<Reserva> findByAirlineId(Long id);
-
-
     Reserva saveReserva(Reserva reserva);
 
 

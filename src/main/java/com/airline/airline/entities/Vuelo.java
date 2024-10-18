@@ -31,7 +31,7 @@ public class Vuelo {
     private Date fechaDeSalida;
 
     @Column(nullable = false)  @Temporal(TemporalType.TIME)  @DateTimeFormat(iso = ISO.TIME)
-    private Date horaDeSalida;
+    private LocalTime horaDeSalida;
 
     @Column(nullable = false) @DateTimeFormat(pattern = "HH:mm")
     private LocalTime duracion;

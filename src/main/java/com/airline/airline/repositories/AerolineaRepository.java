@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface AerolineaRepository extends JpaRepository<Aerolinea, Long> {
 
-    Optional<Aerolinea> findByName(String name);
+    Optional<Aerolinea> findByNombre(String name);
 }

@@ -18,7 +18,7 @@ public class AeropuertoServiceImp implements AeropuertoService {
 
     @Override
     public Optional<Aeropuerto> findByName(String name) {
-        return aeropuertoRepository.findByName(name);
+        return aeropuertoRepository.findByNombre(name);
     }
 
     @Override
