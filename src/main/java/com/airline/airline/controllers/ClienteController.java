@@ -1,8 +1,8 @@
 package com.airline.airline.controllers;
 
-import com.airline.airline.entities.Aerolinea;
+import com.airline.airline.dto.ClienteDTO;
 import com.airline.airline.entities.Cliente;
-import com.airline.airline.services.ClienteService;
+import com.airline.airline.security.services.ClienteService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -21,39 +21,39 @@ public class ClienteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Cliente>> obtenerCliente() {
+    public ResponseEntity<List<ClienteDTO>> obtenerCliente() {
         return ResponseEntity.ok(clienteService.findAll());
     }
 
     @GetMapping("/id")
-    public ResponseEntity<Cliente> obtenerClientePorId(@PathVariable("id") Long id) {
+    public ResponseEntity<ClienteDTO> obtenerClientePorId(@PathVariable("id") Long id) {
         return clienteService.findById(id)
                 .map(c -> ResponseEntity.ok().body(c))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> crearCliente(@RequestBody Cliente cliente) {
+    public ResponseEntity<ClienteDTO> crearCliente(@RequestBody ClienteDTO cliente) {
         return createCliente(cliente);
     }
 
 
     @PutMapping("/id")
-    public ResponseEntity<Cliente> actualizarCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
-        Optional<Cliente> clienteUpdate = clienteService.updateCliente(id, cliente);
+    public ResponseEntity<ClienteDTO> actualizarCliente(@PathVariable Long id, @RequestBody ClienteDTO cliente) {
+        Optional<ClienteDTO> clienteUpdate = clienteService.updateCliente(id, cliente);
         return clienteUpdate.map(c -> ResponseEntity.ok(c)).orElseGet(() -> {
             return createCliente(cliente);
         });
     }
 
-    private ResponseEntity<Cliente> createCliente(Cliente cliente) {
-        Cliente newCliente = clienteService.saveCliente(cliente);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newCliente.getId()).toUri();
+    private ResponseEntity<ClienteDTO> createCliente(ClienteDTO cliente) {
+        ClienteDTO newCliente = clienteService.saveCliente(cliente);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newCliente.id()).toUri();
         return ResponseEntity.created(location).body(newCliente);
     }
 
     @DeleteMapping("/id")
-    public ResponseEntity<Cliente> deleteCliente(@PathVariable Long id) {
+    public ResponseEntity<ClienteDTO> deleteCliente(@PathVariable Long id) {
         return clienteService.findById(id).map(a-> {
             clienteService.deleteCliente(id);
             return ResponseEntity.ok().body(a);

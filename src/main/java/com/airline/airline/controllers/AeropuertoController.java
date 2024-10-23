@@ -1,7 +1,8 @@
 package com.airline.airline.controllers;
 
+import com.airline.airline.dto.AeropuertoDTO;
 import com.airline.airline.entities.Aeropuerto;
-import com.airline.airline.services.AeropuertoService;
+import com.airline.airline.security.services.AeropuertoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -21,39 +22,39 @@ public class AeropuertoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Aeropuerto>> obtenerAerolinea() {
+    public ResponseEntity<List<AeropuertoDTO>> obtenerAerolinea() {
         return ResponseEntity.ok(aeropuertoService.findAll());
     }
 
     @GetMapping("/id")
-    public ResponseEntity<Aeropuerto> obtenerAeropuertoPorId(@PathVariable("id") Long id) {
+    public ResponseEntity<AeropuertoDTO> obtenerAeropuertoPorId(@PathVariable("id") Long id) {
         return aeropuertoService.findById(id)
                 .map(c -> ResponseEntity.ok().body(c))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Aeropuerto> crearAeropuerto(@RequestBody Aeropuerto aeropuerto) {
+    public ResponseEntity<AeropuertoDTO> crearAeropuerto(@RequestBody AeropuertoDTO aeropuerto) {
         return createAeropuerto(aeropuerto);
     }
 
 
     @PutMapping("/id")
-    public ResponseEntity<Aeropuerto> actualizarAeropuerto(@PathVariable Long id, @RequestBody Aeropuerto aeropuerto) {
-        Optional<Aeropuerto> aeropuertoUpdate = aeropuertoService.update(id, aeropuerto);
+    public ResponseEntity<AeropuertoDTO> actualizarAeropuerto(@PathVariable Long id, @RequestBody AeropuertoDTO aeropuerto) {
+        Optional<AeropuertoDTO> aeropuertoUpdate = aeropuertoService.update(id, aeropuerto);
         return aeropuertoUpdate.map(a -> ResponseEntity.ok(a)).orElseGet(() -> {
             return createAeropuerto(aeropuerto);
         });
     }
 
-    private ResponseEntity<Aeropuerto> createAeropuerto(Aeropuerto aeropuerto) {
-        Aeropuerto newAeropuerto = aeropuertoService.save(aeropuerto);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newAeropuerto.getId()).toUri();
+    private ResponseEntity<AeropuertoDTO> createAeropuerto(AeropuertoDTO aeropuerto) {
+        AeropuertoDTO newAeropuerto = aeropuertoService.save(aeropuerto);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newAeropuerto.id()).toUri();
         return ResponseEntity.created(location).body(newAeropuerto);
     }
 
     @DeleteMapping
-    public ResponseEntity<Aeropuerto> deleteAeropuerto(@PathVariable Long id) {
+    public ResponseEntity<AeropuertoDTO> deleteAeropuerto(@PathVariable Long id) {
         return aeropuertoService.findById(id).map(a-> {
             aeropuertoService.delete(id);
             return ResponseEntity.ok().body(a);

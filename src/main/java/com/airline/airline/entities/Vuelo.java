@@ -47,7 +47,4 @@ public class Vuelo {
 
     @ManyToMany(mappedBy = "vuelos")
     private Set<Reserva> reservas;
-
-
-
 }
