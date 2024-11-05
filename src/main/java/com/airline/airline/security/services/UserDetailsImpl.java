@@ -1,6 +1,6 @@
 package com.airline.airline.security.services;
 
-import com.airline.airline.entities.Usuario;
+import com.airline.airline.entities.Cliente;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,7 +28,7 @@ public class UserDetailsImpl implements UserDetails {
         this.username = username;
     }
 
-    public static UserDetailsImpl build(Usuario user) {
+    public static UserDetailsImpl build(Cliente user) {
         List<GrantedAuthority> authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName().name())).collect(Collectors.toList());
         return new UserDetailsImpl(authorities, user.getEmail(), user.getId(), user.getPassword(), user.getUsername());
     }

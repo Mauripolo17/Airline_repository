@@ -1,17 +1,19 @@
 package com.airline.airline.security.services;
 
-import com.airline.airline.entities.Usuario;
-import com.airline.airline.repositories.UsuarioRepository;
+import com.airline.airline.entities.Cliente;
+import com.airline.airline.repositories.ClienteRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private UsuarioRepository usuarioRepository;
+    private ClienteRepository clienteRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario user = usuarioRepository.findByUsername(username).orElseThrow(()-> new UsernameNotFoundException("Username not found"));
+        Cliente user = clienteRepository.findByUsername(username).orElseThrow(()-> new UsernameNotFoundException("Username not found"));
         return UserDetailsImpl.build(user);
     }
 }

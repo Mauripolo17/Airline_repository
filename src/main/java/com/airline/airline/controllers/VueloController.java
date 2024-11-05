@@ -49,7 +49,7 @@ public class VueloController {
 
     private ResponseEntity<VueloDTO> createVuelo(VueloDTO vuelo) {
         VueloDTO newVuelo = vueloService.saveVuelo(vuelo);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newVuelo.getId()).toUri();
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newVuelo.id()).toUri();
         return ResponseEntity.created(location).body(newVuelo);
     }
 

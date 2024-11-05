@@ -4,7 +4,7 @@ import com.airline.airline.entities.Aeropuerto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface AeropuertoMapper {
     AeropuertoDTO toDTO(Aeropuerto aeropuerto);
 

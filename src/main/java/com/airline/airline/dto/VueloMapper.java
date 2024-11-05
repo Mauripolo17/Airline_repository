@@ -4,7 +4,7 @@ import com.airline.airline.entities.Vuelo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface VueloMapper {
     @Mapping(target = "aerolineaId", source = "aerolinea.id")
     @Mapping(target = "aeropuertoId", source = "aeropuerto.id")

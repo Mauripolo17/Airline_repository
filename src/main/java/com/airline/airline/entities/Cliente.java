@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -15,9 +16,16 @@ import java.util.Set;
 @Table(name = "clientes")
 @Entity
 public class Cliente {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String username;
+
+    private String password;
+
+    private String email;
 
     @Column(nullable = false)
     private String nombre;
@@ -26,16 +34,23 @@ public class Cliente {
     private String apellido;
 
     @Column(nullable = false)
+    private int numeroDocumento;
+
+    @Column(nullable = false)
     private String direccion;
 
     @Column(nullable = false)
     private int telefono;
 
-    @Column(nullable = false)
-    private String correoElectronico;
-
     @Column(nullable = false) @Temporal(TemporalType.TIMESTAMP) @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaDeNacimiento;
+
+    @ManyToMany
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name="user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 
     @OneToMany(targetEntity = Reserva.class ,mappedBy = "cliente", fetch = FetchType.LAZY)
     private Set<Reserva> reservas;

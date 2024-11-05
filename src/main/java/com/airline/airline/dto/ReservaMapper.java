@@ -4,7 +4,7 @@ import com.airline.airline.entities.Reserva;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ReservaMapper {
     ReservaDTO toDTO(Reserva reserva);
 

@@ -21,5 +21,5 @@ public class Role {
     private ERole name;
 
     @ManyToMany(mappedBy = "roles")
-    private Set<Usuario> users = new HashSet<>();
+    private Set<Cliente> clientes = new HashSet<>();
 }

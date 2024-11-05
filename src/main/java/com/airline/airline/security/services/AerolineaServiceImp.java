@@ -4,6 +4,7 @@ import com.airline.airline.dto.AerolineaDTO;
 import com.airline.airline.dto.AerolineaMapper;
 import com.airline.airline.entities.Aerolinea;
 import com.airline.airline.repositories.AerolineaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 public class AerolineaServiceImp implements AerolineaService {
 
     private final AerolineaRepository aerolineaRepository;
+
     private final AerolineaMapper aerolineaMapper;
 
 

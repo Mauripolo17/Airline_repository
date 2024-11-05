@@ -33,7 +33,7 @@ public class ClienteServiceImp implements ClienteService {
 
     @Override
     public Optional<ClienteDTO> findByEmail(String email) {
-        return clienteRepository.findByCorreoElectronico(email).map(clienteMapper::toDTOWithoutId);
+        return clienteRepository.findByEmail(email).map(clienteMapper::toDTOWithoutId);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class ClienteServiceImp implements ClienteService {
                     oldCliente.setApellido(cliente.apellido());
                     oldCliente.setDireccion(cliente.direccion());
                     oldCliente.setTelefono(cliente.telefono());
-                    oldCliente.setCorreoElectronico(cliente.correoElectronico());
+                    oldCliente.setEmail(cliente.email());
                     oldCliente.setFechaDeNacimiento(cliente.fechaDeNacimiento());
                     return clienteRepository.save(oldCliente);
                 }).map(clienteMapper::toDTO);

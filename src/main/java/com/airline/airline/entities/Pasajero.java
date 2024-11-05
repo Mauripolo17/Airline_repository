@@ -36,5 +36,4 @@ public class Pasajero {
     @ManyToOne(targetEntity = Reserva.class)
     private Reserva reserva;
 
-
 }
