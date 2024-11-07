@@ -60,6 +60,6 @@ public class VueloController {
         return vueloService.findById(id).map(a-> {
             vueloService.deleteVuelo(id);
             return ResponseEntity.ok().body(a);
-        }).orElse(ResponseEntity.notFound().build());
+        }).orElseThrow(()->new VueloNotFoundException("No se encontró el vuelo con el ID "+id));
     }
 }
