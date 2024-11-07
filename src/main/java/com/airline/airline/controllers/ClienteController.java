@@ -2,6 +2,7 @@ package com.airline.airline.controllers;
 
 import com.airline.airline.dto.ClienteDTO;
 import com.airline.airline.entities.Cliente;
+import com.airline.airline.exceptions.ClienteNotFoundException;
 import com.airline.airline.security.services.ClienteService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class ClienteController {
     public ResponseEntity<ClienteDTO> obtenerClientePorId(@PathVariable("id") Long id) {
         return clienteService.findById(id)
                 .map(c -> ResponseEntity.ok().body(c))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(()->new ClienteNotFoundException("No se pudo encontrar al cliente con el ID "+id));
     }
 
     @PostMapping
