@@ -2,6 +2,7 @@ package com.airline.airline.controllers;
 
 import com.airline.airline.dto.VueloDTO;
 import com.airline.airline.entities.Vuelo;
+import com.airline.airline.exceptions.VueloNotFoundException;
 import com.airline.airline.security.services.VueloService;
 import org.springframework.cache.Cache;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class VueloController {
     public ResponseEntity<VueloDTO> obtenerVueloPorId(@PathVariable("id") Long id) {
         return vueloService.findById(id)
                 .map(a -> ResponseEntity.ok().body(a))
-                .orElseThrow(()->new Cache.ValueRetrievalException("No se puede encontrar el vuelo con el ID "+id));
+                .orElseThrow(()->new VueloNotFoundException("No se encontró el vuelo con el ID "+id));
     }
 
     @PostMapping
