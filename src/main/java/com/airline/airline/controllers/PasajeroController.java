@@ -2,6 +2,7 @@ package com.airline.airline.controllers;
 
 import com.airline.airline.dto.PasajeroDTO;
 import com.airline.airline.entities.Pasajero;
+import com.airline.airline.exceptions.PasajeroNotFoundException;
 import com.airline.airline.security.services.PasajeroService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,7 @@ public class PasajeroController {
 
     @GetMapping
     public ResponseEntity<List<PasajeroDTO>> obtenerPasajero() {
+
         return ResponseEntity.ok(pasajeroService.findAll());
     }
 
@@ -31,7 +33,7 @@ public class PasajeroController {
     public ResponseEntity<PasajeroDTO> obtenerPasajeroPorId(@PathVariable("id") Long id) {
         return pasajeroService.findById(id)
                 .map(a -> ResponseEntity.ok().body(a))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(()->new PasajeroNotFoundException("No se puede encontrar al pasajero con el ID "+id));
     }
 
     @PostMapping
@@ -59,6 +61,6 @@ public class PasajeroController {
         return pasajeroService.findById(id).map(a-> {
             pasajeroService.deletePasajero(id);
             return ResponseEntity.ok().body(a);
-        }).orElse(ResponseEntity.notFound().build());
+        }).orElseThrow(()->new PasajeroNotFoundException("Pasajero "+id+" no encontrado"));
     }
 }

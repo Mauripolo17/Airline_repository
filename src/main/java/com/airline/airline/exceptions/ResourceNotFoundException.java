@@ -1,10 +1,11 @@
 package com.airline.airline.exceptions;
 
+import lombok.Data;
+
+@Data
 public class ResourceNotFoundException extends RuntimeException{
     public ResourceNotFoundException(String message) {
         super(message);
-    }
-    public ResourceNotFoundException() {
     }
     public ResourceNotFoundException(String message, Throwable cause) {
         super(message, cause);

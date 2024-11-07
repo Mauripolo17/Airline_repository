@@ -2,6 +2,7 @@ package com.airline.airline.controllers;
 
 import com.airline.airline.dto.AeropuertoDTO;
 import com.airline.airline.entities.Aeropuerto;
+import com.airline.airline.exceptions.AeropuertoNotFoundException;
 import com.airline.airline.security.services.AeropuertoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class AeropuertoController {
     public ResponseEntity<AeropuertoDTO> obtenerAeropuertoPorId(@PathVariable("id") Long id) {
         return aeropuertoService.findById(id)
                 .map(c -> ResponseEntity.ok().body(c))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(()->new AeropuertoNotFoundException("No se puede encontrar el aeropuerto con el ID" +id));
     }
 
     @PostMapping
@@ -58,7 +59,7 @@ public class AeropuertoController {
         return aeropuertoService.findById(id).map(a-> {
             aeropuertoService.delete(id);
             return ResponseEntity.ok().body(a);
-        }).orElse(ResponseEntity.notFound().build());
+        }).orElseThrow(()->new AeropuertoNotFoundException("No se encontró el aeropuerto con el ID "+id));
     }
 
 }

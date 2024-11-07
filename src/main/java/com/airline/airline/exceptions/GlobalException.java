@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 
 @ControllerAdvice
 public class GlobalException {
+
     @ExceptionHandler(value = ResourceNotFoundException.class)
     public ResponseEntity<ErrorMessage> resourceNotFoundHandler(ResourceNotFoundException ex, WebRequest wr){
         ErrorMessage error = new ErrorMessage();

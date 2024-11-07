@@ -63,6 +63,8 @@ public class AerolineaServiceImp implements AerolineaService {
 
     @Override
     public List<AerolineaDTO> findAll() {
-        return aerolineaRepository.findAll().stream().map(dto -> aerolineaMapper.toDTO(dto)).collect(Collectors.toList());
+        return aerolineaRepository.findAll().stream()
+                .map(dto -> aerolineaMapper.toDTO(dto))
+                .collect(Collectors.toList());
     }
 }

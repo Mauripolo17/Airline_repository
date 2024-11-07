@@ -2,6 +2,7 @@ package com.airline.airline.controllers;
 
 import com.airline.airline.dto.ReservaDTO;
 import com.airline.airline.entities.Reserva;
+import com.airline.airline.exceptions.ReservaNotFoundException;
 import com.airline.airline.security.services.ReservaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class ReservaController {
     public ResponseEntity<ReservaDTO> obtenerReservaPorId(@PathVariable("id") Long id) {
         return reservaService.findById(id)
                 .map(a -> ResponseEntity.ok().body(a))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(()->new ReservaNotFoundException("No se puede encontrar la reserva con el ID "+id));
     }
 
     @PostMapping
@@ -58,6 +59,6 @@ public class ReservaController {
         return reservaService.findById(id).map(a-> {
             reservaService.deleteReserva(id);
             return ResponseEntity.ok().body(a);
-        }).orElse(ResponseEntity.notFound().build());
+        }).orElseThrow(()->new ReservaNotFoundException("No se encontró la reserva con el ID "+id));
     }
 }
