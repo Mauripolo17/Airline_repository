@@ -8,5 +8,6 @@ import java.time.LocalTime;
 import java.util.Date;
 import java.util.Set;
 
-public record VueloDTO(Long id, String origen, String destino, Date fechaDeSalida, LocalTime horaDeSalida, Integer capacidad, Aerolinea aerolinea, Aeropuerto aeropuerto, LocalTime duracion, Long aerolineaId, Long aeropuertoId, Set<Reserva> reservas) {
+public record VueloDTO(Long id, String origen, String destino, Date fechaDeSalida, LocalTime horaDeSalida,
+                       Integer capacidad, Long aerolinea, Long aeropuerto, LocalTime duracion) {
 }

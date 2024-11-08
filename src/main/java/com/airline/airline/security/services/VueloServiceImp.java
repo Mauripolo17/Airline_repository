@@ -3,6 +3,7 @@ package com.airline.airline.security.services;
 import com.airline.airline.dto.ReservaDTO;
 import com.airline.airline.dto.VueloDTO;
 import com.airline.airline.dto.VueloMapper;
+import com.airline.airline.entities.Aerolinea;
 import com.airline.airline.entities.Reserva;
 import com.airline.airline.entities.Vuelo;
 import com.airline.airline.repositories.VueloRepository;
@@ -17,10 +18,14 @@ public class VueloServiceImp implements VueloService {
 
     private final VueloRepository vueloRepository;
     private final VueloMapper vueloMapper;
+    private final AerolineaService aerolineaService;
+    private final AeropuertoService aeropuertoService;
 
-    public VueloServiceImp(VueloRepository vueloRepository, VueloMapper vueloMapper) {
+    public VueloServiceImp(VueloRepository vueloRepository, VueloMapper vueloMapper, AerolineaService aerolineaService, AeropuertoService aeropuertoService) {
         this.vueloRepository = vueloRepository;
         this.vueloMapper = vueloMapper;
+        this.aerolineaService = aerolineaService;
+        this.aeropuertoService = aeropuertoService;
     }
 
     @Override
@@ -35,7 +40,7 @@ public class VueloServiceImp implements VueloService {
 
     @Override
     public VueloDTO saveVuelo(VueloDTO vuelo) {
-        Vuelo vueloEntity = vueloMapper.toEntity(vuelo);
+        Vuelo vueloEntity = vueloMapper.toEntity(vuelo, aerolineaService, aeropuertoService);
         return vueloMapper.toDTO(vueloRepository.save(vueloEntity));
     }
     @Override
@@ -47,7 +52,8 @@ public class VueloServiceImp implements VueloService {
             vueloInBD.setFechaDeSalida(vuelo.fechaDeSalida());
             vueloInBD.setHoraDeSalida(vuelo.horaDeSalida());
             vueloInBD.setDuracion(vuelo.duracion());
-            vueloInBD.setReservas(vuelo.reservas());
+            vueloInBD.setAerolinea(aerolineaService.findAerolineaById(vuelo.aerolinea()));
+            vueloInBD.setAeropuerto(aeropuertoService.findAeropuertoById(vuelo.aeropuerto()));
 
             return vueloRepository.save(vueloInBD);
         }).map(vueloMapper::toDTO);
@@ -65,6 +71,11 @@ public class VueloServiceImp implements VueloService {
     public Optional<VueloDTO> findByReserva(Long id, ReservaDTO reserva) {
 
         return vueloRepository.findByReservas_Id(id).map(vueloMapper::toDTO);
+    }
+
+    @Override
+    public Vuelo findVueloById(Long id) {
+        return vueloRepository.findById(id).orElse(null);
     }
 
 }

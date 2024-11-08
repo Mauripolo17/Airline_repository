@@ -15,10 +15,12 @@ public class PasajeroServiceImp implements PasajeroService {
 
     private final PasajeroRepository pasajeroRepository;
     private final PasajeroMapper pasajeroMapper;
+    private final ReservaService reservaService;
 
-    public PasajeroServiceImp(PasajeroRepository pasajeroRepository, PasajeroMapper pasajeroMapper) {
+    public PasajeroServiceImp(PasajeroRepository pasajeroRepository, PasajeroMapper pasajeroMapper, ReservaService reservaService) {
         this.pasajeroRepository = pasajeroRepository;
         this.pasajeroMapper = pasajeroMapper;
+        this.reservaService = reservaService;
     }
 
 
@@ -39,7 +41,7 @@ public class PasajeroServiceImp implements PasajeroService {
 
     @Override
     public PasajeroDTO savePasajero(PasajeroDTO pasajero) {
-        Pasajero pasajeroEntity = pasajeroMapper.toEntity(pasajero);
+        Pasajero pasajeroEntity = pasajeroMapper.toEntity(pasajero, reservaService);
         return pasajeroMapper.toDTO(pasajeroRepository.save(pasajeroEntity));
     }
 

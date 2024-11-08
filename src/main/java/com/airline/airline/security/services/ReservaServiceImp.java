@@ -28,6 +28,11 @@ public class ReservaServiceImp implements ReservaService {
     }
 
     @Override
+    public Reserva findReservaById(Long id) {
+        return reservaRepository.findById(id).orElse(null)  ;
+    }
+
+    @Override
     public List<ReservaDTO> findAll() {
         return reservaRepository.findAll().stream().map(dto -> reservaMapper.toDTOWithoutId(dto)).collect(Collectors.toList());
     }

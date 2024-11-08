@@ -20,4 +20,5 @@ public interface AerolineaService {
 
     List<AerolineaDTO> findAll();
 
+    Aerolinea findAerolineaById(Long id);
 }

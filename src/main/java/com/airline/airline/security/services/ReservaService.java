@@ -20,6 +20,8 @@ public interface ReservaService {
 
     ReservaDTO saveReserva(ReservaDTO reserva);
 
+    Reserva findReservaById(Long id);
+
 
 
 }

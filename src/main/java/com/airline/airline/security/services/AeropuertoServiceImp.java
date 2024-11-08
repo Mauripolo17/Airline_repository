@@ -63,4 +63,9 @@ public class AeropuertoServiceImp implements AeropuertoService {
     public List<AeropuertoDTO> findAll(String name) {
         return aeropuertoRepository.findAll().stream().map(dto -> aeropuertoMapper.toDTOWithoutID(dto)).collect(Collectors.toList());
     }
+
+    @Override
+    public Aeropuerto findAeropuertoById(Long id) {
+        return aeropuertoRepository.findById(id).orElse(null);
+    }
 }

@@ -21,4 +21,6 @@ public interface AeropuertoService {
     void delete(Long id);
     List<AeropuertoDTO> findAll(String name);
 
+    Aeropuerto findAeropuertoById(Long id);
+
 }

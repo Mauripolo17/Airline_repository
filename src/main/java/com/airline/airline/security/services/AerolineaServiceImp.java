@@ -53,7 +53,7 @@ public class AerolineaServiceImp implements AerolineaService {
         return aerolineaRepository.findById(id).
                 map(aerolineaInBD -> {
                             aerolineaInBD.setNombre(newAerolinea.nombre());
-                            aerolineaInBD.setCodigoAerolinea(newAerolinea.codigoAerolinea());
+                            aerolineaInBD.setCodigoAerolinea(newAerolinea.aerolinea());
                             aerolineaInBD.setPaisOrigen(newAerolinea.paisOrigen());
                             return aerolineaRepository.save(aerolineaInBD);
                         }
@@ -66,5 +66,10 @@ public class AerolineaServiceImp implements AerolineaService {
         return aerolineaRepository.findAll().stream()
                 .map(dto -> aerolineaMapper.toDTO(dto))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Aerolinea findAerolineaById(Long id) {
+        return aerolineaRepository.findById(id).orElse(null);
     }
 }

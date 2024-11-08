@@ -24,10 +24,12 @@ public class JwtUtil {
 
     public String generateJwtToken(Authentication autentication){
         UserDetails user = (UserDetailsImpl) autentication.getPrincipal();
-        return Jwts.builder().subject(user.getUsername())
-                .issuedAt(new Date())
-                .expiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .signWith(key(), SignatureAlgorithm.HS256).compact();
+        return Jwts.builder()
+                .setSubject((user.getUsername()))
+                .setIssuedAt(new Date())
+                //.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+                .signWith(key(), SignatureAlgorithm.HS256)
+                .compact();
     }
 
     public Key key(){
@@ -36,7 +38,7 @@ public class JwtUtil {
 
     public boolean validateJwtToken(String authToken){
         try {
-            Jwts.parser().setSigningKey(key()).build().parse(authToken);
+            Jwts.parserBuilder().setSigningKey(key()).build().parse(authToken);
             return true;
         }catch (MalformedJwtException e ){
             log.error("Invalid JWT token", e.getMessage());
@@ -51,6 +53,7 @@ public class JwtUtil {
     }
 
     public String getUsernameFromJwtToken(String authToken){
-        return Jwts.parser().setSigningKey(key()).build().parseClaimsJws(authToken).getPayload().getSubject();
+        return Jwts.parserBuilder().setSigningKey(key()).build()
+                .parseClaimsJws(authToken).getBody().getSubject();
     }
 }

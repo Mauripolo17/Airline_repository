@@ -24,5 +24,7 @@ public interface VueloService {
 
     Optional<VueloDTO> findByReserva(Long id, ReservaDTO reserva);
 
+    Vuelo findVueloById(Long id);
+
 
 }
