@@ -5,6 +5,7 @@ import com.airline.airline.entities.Cliente;
 import com.airline.airline.exceptions.ClienteNotFoundException;
 import com.airline.airline.security.services.ClienteService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -22,6 +23,7 @@ public class ClienteController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<ClienteDTO>> obtenerCliente() {
         return ResponseEntity.ok(clienteService.findAll());
     }

@@ -5,7 +5,10 @@ import com.airline.airline.dto.JwtResponse;
 import com.airline.airline.dto.LoginRequest;
 import com.airline.airline.dto.SingupRequest;
 import com.airline.airline.entities.Cliente;
+import com.airline.airline.entities.ERole;
+import com.airline.airline.entities.Role;
 import com.airline.airline.repositories.ClienteRepository;
+import com.airline.airline.repositories.RoleRepository;
 import com.airline.airline.security.jwt.JwtUtil;
 import com.airline.airline.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +37,14 @@ public class AuthenticationController {
     @Autowired private JwtUtil jwtUtil;
     @Autowired PasswordEncoder passwordEncoder;
     @Autowired ClienteRepository clienteRepository;
+    @Autowired RoleRepository roleRepository;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-    Authentication authentication= authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password()));
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest)  {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.username(),
+                        loginRequest.password())
+        );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwtToken = jwtUtil.generateJwtToken(authentication);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();

@@ -27,25 +27,25 @@ public class Cliente {
 
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String nombre;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String apellido;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private int numeroDocumento;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String direccion;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private int telefono;
 
-    @Column(nullable = false) @Temporal(TemporalType.TIMESTAMP) @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(nullable = true) @Temporal(TemporalType.TIMESTAMP) @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaDeNacimiento;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name="user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
