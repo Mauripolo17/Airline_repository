@@ -41,4 +41,14 @@ public class GlobalException {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
+
+    @ExceptionHandler(value= IDNumberDuplicatedException.class)
+    public ResponseEntity<ErrorMessage> idNumberDuplicatedHandler(IDNumberDuplicatedException ex, WebRequest wr){
+        ErrorMessage error = new ErrorMessage();
+        error.setStatus(HttpStatus.CONFLICT.value());
+        error.setMessage(ex.getMessage());
+        error.setTimeStamp(LocalDateTime.now());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
 }
