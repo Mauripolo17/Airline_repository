@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @ControllerAdvice
@@ -21,6 +20,25 @@ public class GlobalException {
         error.setTimeStamp(LocalDateTime.now());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 
+    }
+
+    @ExceptionHandler(value = EmailDuplicatedException.class)
+    public ResponseEntity<ErrorMessage> emailDuplicatedHandler(EmailDuplicatedException ex, WebRequest wr){
+        ErrorMessage error = new ErrorMessage();
+        error.setStatus(HttpStatus.CONFLICT.value());
+        error.setMessage(ex.getMessage());
+        error.setTimeStamp(LocalDateTime.now());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
+
+    @ExceptionHandler(value = ExistingUsernameException.class)
+    public ResponseEntity<ErrorMessage> existingUsernameHandler(ExistingUsernameException ex, WebRequest wr){
+        ErrorMessage error = new ErrorMessage();
+        error.setStatus(HttpStatus.CONFLICT.value());
+        error.setMessage(ex.getMessage());
+        error.setTimeStamp(LocalDateTime.now());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
 }
