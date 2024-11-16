@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,12 +55,24 @@ public class AuthenticationController {
     }
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody SingupRequest sRequest){
-        Cliente user = new Cliente();
-        user.setUsername(sRequest.username());
-        user.setPassword(passwordEncoder.encode(sRequest.password()));
-        user.setEmail(sRequest.email());
-        Set<String> roles = sRequest.roles();
-        Cliente newUser = clienteRepository.save(user);
+        Cliente cliente = new Cliente();
+        cliente.setUsername(sRequest.username());
+        cliente.setPassword(passwordEncoder.encode(sRequest.password()));
+        cliente.setEmail(sRequest.email());
+        cliente.setNombre(sRequest.nombre());
+        cliente.setApellido(sRequest.apellido());
+        cliente.setNumeroDocumento(sRequest.numeroDocumento());
+        cliente.setDireccion(sRequest.direccion());
+        cliente.setTelefono(sRequest.telefono());
+        cliente.setFechaDeNacimiento(sRequest.fechaDeNacimiento());
+        Set<Role> roles = sRequest.roles().stream()
+                .map(roleName -> roleRepository.findByName(ERole.valueOf(roleName))
+                        .orElseThrow(() -> new RuntimeException("Error: Role not found")))
+                .collect(Collectors.toSet());
+
+        cliente.setRoles(roles);
+
+        Cliente newUser = clienteRepository.save(cliente);
         return ResponseEntity.ok(newUser);
     }
 

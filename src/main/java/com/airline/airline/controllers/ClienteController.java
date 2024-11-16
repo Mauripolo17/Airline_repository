@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/clientes")
+
 public class ClienteController {
     private final ClienteService clienteService;
 
@@ -23,12 +24,13 @@ public class ClienteController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('user')")
     public ResponseEntity<List<ClienteDTO>> obtenerCliente() {
         return ResponseEntity.ok(clienteService.findAll());
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
+    @PreAuthorize("hasRole('user')")
     public ResponseEntity<ClienteDTO> obtenerClientePorId(@PathVariable("id") Long id) {
         return clienteService.findById(id)
                 .map(c -> ResponseEntity.ok().body(c))

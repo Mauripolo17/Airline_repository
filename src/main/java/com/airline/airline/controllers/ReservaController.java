@@ -5,6 +5,7 @@ import com.airline.airline.entities.Reserva;
 import com.airline.airline.exceptions.ReservaNotFoundException;
 import com.airline.airline.security.services.ReservaService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/reservas")
+@PreAuthorize("hasRole('user')")
 public class ReservaController {
     private final ReservaService reservaService;
 

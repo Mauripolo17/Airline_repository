@@ -31,6 +31,10 @@ public class ClienteServiceImp implements ClienteService {
         return clienteRepository.findById(id).map(clienteMapper::toDTO);
     }
 
+    public Optional<Cliente> findClienteById(Long id) {
+        return clienteRepository.findById(id);
+    }
+
     @Override
     public Optional<ClienteDTO> findByEmail(String email) {
         return clienteRepository.findByEmail(email).map(clienteMapper::toDTOWithoutId);

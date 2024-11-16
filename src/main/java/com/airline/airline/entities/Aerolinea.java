@@ -19,7 +19,7 @@ public class Aerolinea {
     private String nombre;
 
     @Column(nullable = false)
-    private int codigoAerolinea;
+    private Long codigoAerolinea;
 
     @Column(nullable = false)
     private String paisOrigen;

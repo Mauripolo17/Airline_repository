@@ -1,4 +1,4 @@
 package com.airline.airline.dto;
 
-public record AerolineaDTO(Long id, String nombre, Integer aerolinea, String paisOrigen) {
+public record AerolineaDTO(Long id, String nombre, Long codigoAerolinea, String paisOrigen) {
 }

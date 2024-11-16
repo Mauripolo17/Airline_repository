@@ -6,6 +6,7 @@ import com.airline.airline.exceptions.VueloNotFoundException;
 import com.airline.airline.security.services.VueloService;
 import org.springframework.cache.Cache;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -15,20 +16,21 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/vuelos")
+@PreAuthorize("hasRole('user')")
+@CrossOrigin("http://localhost:5173/")
 public class VueloController {
     private final VueloService vueloService;
 
     public VueloController(VueloService vueloService) {
         this.vueloService = vueloService;
     }
-
-
+    @PreAuthorize("hasRole('user')")
     @GetMapping
     public ResponseEntity<List<VueloDTO>> obtenerVuelo() {
         return ResponseEntity.ok(vueloService.findAll());
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<VueloDTO> obtenerVueloPorId(@PathVariable("id") Long id) {
         return vueloService.findById(id)
                 .map(a -> ResponseEntity.ok().body(a))
@@ -36,6 +38,7 @@ public class VueloController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('user')")
     public ResponseEntity<VueloDTO> crearVuelo(@RequestBody VueloDTO vuelo) {
         return createVuelo(vuelo);
     }

@@ -5,6 +5,7 @@ import com.airline.airline.entities.Aerolinea;
 import com.airline.airline.exceptions.AerolineaNotFoundException;
 import com.airline.airline.security.services.AerolineaService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/aerolinea")
+@PreAuthorize("hasRole('user')")
 public class AerolineaController {
 
     private final AerolineaService aerolineaService;

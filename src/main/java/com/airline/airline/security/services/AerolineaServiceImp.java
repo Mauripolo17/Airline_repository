@@ -53,7 +53,7 @@ public class AerolineaServiceImp implements AerolineaService {
         return aerolineaRepository.findById(id).
                 map(aerolineaInBD -> {
                             aerolineaInBD.setNombre(newAerolinea.nombre());
-                            aerolineaInBD.setCodigoAerolinea(newAerolinea.aerolinea());
+                            aerolineaInBD.setCodigoAerolinea(newAerolinea.codigoAerolinea());
                             aerolineaInBD.setPaisOrigen(newAerolinea.paisOrigen());
                             return aerolineaRepository.save(aerolineaInBD);
                         }

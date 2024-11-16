@@ -15,11 +15,13 @@ public class ReservaServiceImp implements ReservaService {
 
     private final ReservaRepository reservaRepository;
     private final ReservaMapper reservaMapper;
+    private final ClienteService clienteService;
 
-    public ReservaServiceImp(ReservaRepository reservaRepository, ReservaMapper reservaMapper) {
+    public ReservaServiceImp(ReservaRepository reservaRepository, ReservaMapper reservaMapper, ClienteService clienteService) {
 
         this.reservaRepository = reservaRepository;
         this.reservaMapper = reservaMapper;
+        this.clienteService = clienteService;
     }
 
     @Override
@@ -41,10 +43,8 @@ public class ReservaServiceImp implements ReservaService {
 
     public Optional<ReservaDTO> updateReserva(Long id, ReservaDTO reserva) {
         return reservaRepository.findById(id).map(reservaInBD->{
-            reservaInBD.setCliente(reserva.cliente());
+            reservaInBD.setCliente(clienteService.findClienteById(reserva.cliente()).orElse(null));
             reservaInBD.setFechaReserva(reserva.fechaReserva());
-            reservaInBD.setPasajeros(reserva.pasajeros());
-            reservaInBD.setVuelos(reserva.vuelos());
             return reservaRepository.save(reservaInBD);
         }).map(reservaMapper::toDTO);
     }
@@ -62,7 +62,7 @@ public class ReservaServiceImp implements ReservaService {
 
     @Override
     public ReservaDTO saveReserva(ReservaDTO reserva) {
-        Reserva reservaEntity = reservaMapper.toEntity(reserva);
+        Reserva reservaEntity = reservaMapper.toEntity(reserva, clienteService);
         return reservaMapper.toDTO(reservaRepository.save(reservaEntity));
     }
 

@@ -3,7 +3,7 @@ package com.airline.airline.exceptions;
 import lombok.Data;
 
 @Data
-public class ResourceNotFoundException extends RuntimeException{
+public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {
         super(message);
     }

@@ -5,6 +5,7 @@ import com.airline.airline.entities.Aeropuerto;
 import com.airline.airline.exceptions.AeropuertoNotFoundException;
 import com.airline.airline.security.services.AeropuertoService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/aeropuerto")
+
 public class AeropuertoController {
     private final AeropuertoService aeropuertoService;
 
@@ -23,6 +25,7 @@ public class AeropuertoController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('user')")
     public ResponseEntity<List<AeropuertoDTO>> obtenerAerolinea() {
         return ResponseEntity.ok(aeropuertoService.findAll());
     }
@@ -35,6 +38,7 @@ public class AeropuertoController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('user')")
     public ResponseEntity<AeropuertoDTO> crearAeropuerto(@RequestBody AeropuertoDTO aeropuerto) {
         return createAeropuerto(aeropuerto);
     }

@@ -34,13 +34,13 @@ public class Cliente {
     private String apellido;
 
     @Column(nullable = true)
-    private int numeroDocumento;
+    private Long numeroDocumento;
 
     @Column(nullable = true)
     private String direccion;
 
     @Column(nullable = true)
-    private int telefono;
+    private Long telefono;
 
     @Column(nullable = true) @Temporal(TemporalType.TIMESTAMP) @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaDeNacimiento;
@@ -50,9 +50,18 @@ public class Cliente {
             joinColumns = @JoinColumn(name="user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roles = new HashSet<>();
+    private Set<Role> roles;
 
     @OneToMany(targetEntity = Reserva.class ,mappedBy = "cliente", fetch = FetchType.LAZY)
     private Set<Reserva> reservas;
 
+    public void addRole(Role role) {
+        this.roles.add(role);
+        role.getClientes().add(this); // Si existe una relación inversa
+    }
+
+    public void removeRole(Role role) {
+        this.roles.remove(role);
+        role.getClientes().remove(this); // Si existe una relación inversa
+    }
 }

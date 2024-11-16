@@ -28,7 +28,7 @@ public class Pasajero {
     private String tipoDocumento;
 
     @Column(nullable = false)
-    private int numeroDocumento;
+    private Long numeroDocumento;
 
     @Column(nullable = false) @Temporal(TemporalType.TIMESTAMP) @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaDeNacimiento;

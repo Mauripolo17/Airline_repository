@@ -19,8 +19,6 @@ public class GlobalException {
         error.setStatus(HttpStatus.NOT_FOUND.value());
         error.setMessage(ex.getMessage());
         error.setTimeStamp(LocalDateTime.now());
-
-
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 
     }
