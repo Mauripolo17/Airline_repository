@@ -12,6 +12,8 @@ public interface ReservaService {
 
     List<ReservaDTO> findAll();
 
+    List<ReservaDTO> saveAll(List<ReservaDTO> reservas);
+
     Optional<ReservaDTO> updateReserva(Long id, ReservaDTO reserva);
 
     void deleteReserva(Long id);

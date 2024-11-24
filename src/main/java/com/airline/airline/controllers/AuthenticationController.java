@@ -7,6 +7,7 @@ import com.airline.airline.dto.SingupRequest;
 import com.airline.airline.entities.Cliente;
 import com.airline.airline.entities.ERole;
 import com.airline.airline.entities.Role;
+import com.airline.airline.exceptions.ResourceNotFoundException;
 import com.airline.airline.repositories.ClienteRepository;
 import com.airline.airline.repositories.RoleRepository;
 import com.airline.airline.security.jwt.JwtUtil;
@@ -65,13 +66,13 @@ public class AuthenticationController {
         cliente.setDireccion(sRequest.direccion());
         cliente.setTelefono(sRequest.telefono());
         cliente.setFechaDeNacimiento(sRequest.fechaDeNacimiento());
-        Set<Role> roles = sRequest.roles().stream()
-                .map(roleName -> roleRepository.findByName(ERole.valueOf(roleName))
-                        .orElseThrow(() -> new RuntimeException("Error: Role not found")))
-                .collect(Collectors.toSet());
-
+//        Set<Role> roles = sRequest.roles().stream()
+//                .map(roleName -> roleRepository.findByName(ERole.valueOf(roleName))
+//                        .orElseThrow(() -> new RuntimeException("Error: Role not found")))
+//                .collect(Collectors.toSet());
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleRepository.findByName(ERole.valueOf("ROLE_USER")).orElse(null));
         cliente.setRoles(roles);
-
         Cliente newUser = clienteRepository.save(cliente);
         return ResponseEntity.ok(newUser);
     }

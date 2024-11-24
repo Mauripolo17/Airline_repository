@@ -41,6 +41,12 @@ public class ClienteServiceImp implements ClienteService {
     }
 
     @Override
+    public Optional<ClienteDTO> findByUsername(String username) {
+        return clienteRepository.findByUsername(username).map(clienteMapper::toDTOWithoutId);
+    }
+
+
+    @Override
     public Optional<ClienteDTO> findByNombre(String nombre) {
         return clienteRepository.findByNombre(nombre).map(clienteMapper::toDTOWithoutId);
     }

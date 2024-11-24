@@ -18,6 +18,8 @@ public interface ClienteService {
 
     Optional<Cliente> findClienteById(Long id);
 
+    Optional<ClienteDTO> findByUsername(String username);
+
     ClienteDTO saveCliente(ClienteDTO cliente);
 
     void deleteCliente(Long id);

@@ -16,9 +16,13 @@ public interface VueloService {
 
     VueloDTO saveVuelo(VueloDTO vuelo);
 
+    List<String> getCiudadesDestino();
+
     Optional<VueloDTO> updateVuelo(Long id, VueloDTO vuelo);
 
     void deleteVuelo(Long id);
+
+    List<Vuelo> saveAll(List<VueloDTO> vuelos);
 
     List<Reserva> findByVuelo(Long id);
 

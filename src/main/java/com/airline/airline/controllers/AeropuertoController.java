@@ -30,7 +30,7 @@ public class AeropuertoController {
         return ResponseEntity.ok(aeropuertoService.findAll());
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<AeropuertoDTO> obtenerAeropuertoPorId(@PathVariable("id") Long id) {
         return aeropuertoService.findById(id)
                 .map(c -> ResponseEntity.ok().body(c))
@@ -44,7 +44,7 @@ public class AeropuertoController {
     }
 
 
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     public ResponseEntity<AeropuertoDTO> actualizarAeropuerto(@PathVariable Long id, @RequestBody AeropuertoDTO aeropuerto) {
         Optional<AeropuertoDTO> aeropuertoUpdate = aeropuertoService.update(id, aeropuerto);
         return aeropuertoUpdate.map(a -> ResponseEntity.ok(a)).orElseGet(() -> {
@@ -58,7 +58,7 @@ public class AeropuertoController {
         return ResponseEntity.created(location).body(newAeropuerto);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<AeropuertoDTO> deleteAeropuerto(@PathVariable Long id) {
         return aeropuertoService.findById(id).map(a-> {
             aeropuertoService.delete(id);

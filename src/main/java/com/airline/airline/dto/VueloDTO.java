@@ -14,6 +14,8 @@ public record VueloDTO(Long id,
                        Date fechaDeSalida,
                        LocalTime horaDeSalida,
                        Integer capacidad,
+                       Double precio,
+                       String img,
                        Long aerolinea,
                        Long aeropuerto,
                        LocalTime duracion) {

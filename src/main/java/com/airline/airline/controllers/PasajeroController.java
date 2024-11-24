@@ -29,7 +29,7 @@ public class PasajeroController {
         return ResponseEntity.ok(pasajeroService.findAll());
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<PasajeroDTO> obtenerPasajeroPorId(@PathVariable("id") Long id) {
         return pasajeroService.findById(id)
                 .map(a -> ResponseEntity.ok().body(a))
@@ -42,7 +42,7 @@ public class PasajeroController {
     }
 
 
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     public ResponseEntity<PasajeroDTO> actualizarPasajero(@PathVariable Long id, @RequestBody PasajeroDTO pasajero) {
         Optional<PasajeroDTO> pasajeroUpdate = pasajeroService.updatePasajero(id, pasajero);
         return pasajeroUpdate.map(p -> ResponseEntity.ok(p)).orElseGet(() -> {
@@ -56,7 +56,7 @@ public class PasajeroController {
         return ResponseEntity.created(location).body(newPasajero);
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public ResponseEntity<PasajeroDTO> deletePasajero(@PathVariable Long id) {
         return pasajeroService.findById(id).map(a-> {
             pasajeroService.deletePasajero(id);

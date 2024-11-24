@@ -1,5 +1,6 @@
 package com.airline.airline.controllers;
 
+import com.airline.airline.dto.ReservaDTO;
 import com.airline.airline.dto.VueloDTO;
 import com.airline.airline.entities.Vuelo;
 import com.airline.airline.exceptions.VueloNotFoundException;
@@ -17,19 +18,24 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/vuelos")
 @PreAuthorize("hasRole('user')")
-@CrossOrigin("http://localhost:5173/")
+@CrossOrigin("/**")
 public class VueloController {
     private final VueloService vueloService;
 
     public VueloController(VueloService vueloService) {
         this.vueloService = vueloService;
     }
-    @PreAuthorize("hasRole('user')")
-    @GetMapping
+
+
+    @GetMapping("/getVuelos")
     public ResponseEntity<List<VueloDTO>> obtenerVuelo() {
         return ResponseEntity.ok(vueloService.findAll());
     }
 
+    @GetMapping("/ciudades")
+    public ResponseEntity<List<String>> obtenerCiudade() {
+        return ResponseEntity.ok(vueloService.getCiudadesDestino());
+    }
     @GetMapping("/{id}")
     public ResponseEntity<VueloDTO> obtenerVueloPorId(@PathVariable("id") Long id) {
         return vueloService.findById(id)
@@ -44,7 +50,12 @@ public class VueloController {
     }
 
 
-    @PutMapping("/id")
+    @PostMapping("/saveAll")
+    public ResponseEntity<List<Vuelo>> guardarTodos(@RequestBody List<VueloDTO> vuelos) {
+        return ResponseEntity.ok(vueloService.saveAll(vuelos));
+    }
+
+    @PutMapping("/{id}")
     public ResponseEntity<VueloDTO> actualizarVuelo(@PathVariable Long id, @RequestBody VueloDTO vuelo) {
         Optional<VueloDTO> vueloUpdate = vueloService.updateVuelo(id, vuelo);
         return vueloUpdate.map(p -> ResponseEntity.ok(p)).orElseGet(() -> {
@@ -58,7 +69,7 @@ public class VueloController {
         return ResponseEntity.created(location).body(newVuelo);
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public ResponseEntity<VueloDTO> deleteVuelo(@PathVariable Long id) {
         return vueloService.findById(id).map(a-> {
             vueloService.deleteVuelo(id);

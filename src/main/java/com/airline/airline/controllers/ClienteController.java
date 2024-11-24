@@ -37,13 +37,20 @@ public class ClienteController {
                 .orElseThrow(()->new ClienteNotFoundException("No se pudo encontrar al cliente con el ID "+id));
     }
 
+    @GetMapping("/username/{username}")
+    @PreAuthorize("hasRole('user')")
+    public ResponseEntity<ClienteDTO> obtenerClientePorUsername(@PathVariable("username") String username) {
+        return clienteService.findByUsername(username)
+                .map(c -> ResponseEntity.ok().body(c))
+                .orElseThrow(()->new ClienteNotFoundException("No se pudo encontrar al cliente con el username "+ username));
+    }
     @PostMapping
     public ResponseEntity<ClienteDTO> crearCliente(@RequestBody ClienteDTO cliente) {
         return createCliente(cliente);
     }
 
 
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     public ResponseEntity<ClienteDTO> actualizarCliente(@PathVariable Long id, @RequestBody ClienteDTO cliente) {
         Optional<ClienteDTO> clienteUpdate = clienteService.updateCliente(id, cliente);
         return clienteUpdate.map(c -> ResponseEntity.ok(c)).orElseGet(() -> {
@@ -57,7 +64,7 @@ public class ClienteController {
         return ResponseEntity.created(location).body(newCliente);
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public ResponseEntity<ClienteDTO> deleteCliente(@PathVariable Long id) {
         return clienteService.findById(id).map(a-> {
             clienteService.deleteCliente(id);

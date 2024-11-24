@@ -16,7 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "vuelos")
 @Entity
-public class Vuelo {
+public class    Vuelo {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -38,6 +38,12 @@ public class Vuelo {
 
     @Column(nullable = false)
     private int capacidad;
+
+    @Column(nullable = true)
+    private double precio;
+
+    @Column
+    private String img;
 
     @ManyToOne(targetEntity = Aerolinea.class, fetch = FetchType.LAZY)
     private Aerolinea aerolinea;

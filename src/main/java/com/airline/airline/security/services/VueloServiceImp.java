@@ -35,14 +35,21 @@ public class VueloServiceImp implements VueloService {
 
     @Override
     public List<VueloDTO> findAll() {
-        return vueloRepository.findAll().stream().map(dto -> vueloMapper.toDTOWithoutId(dto)).collect(Collectors.toList());
+        return vueloRepository.findAll().stream().map(vueloMapper::toDTO).collect(Collectors.toList());
     }
+
 
     @Override
     public VueloDTO saveVuelo(VueloDTO vuelo) {
         Vuelo vueloEntity = vueloMapper.toEntity(vuelo, aerolineaService, aeropuertoService);
         return vueloMapper.toDTO(vueloRepository.save(vueloEntity));
     }
+
+    @Override
+    public List<String> getCiudadesDestino() {
+        return vueloRepository.findCiudadesDestino();
+    }
+
     @Override
     public Optional<VueloDTO> updateVuelo(Long id, VueloDTO vuelo) {
         return vueloRepository.findById(id).map(vueloInBD->{
@@ -62,6 +69,12 @@ public class VueloServiceImp implements VueloService {
     public void deleteVuelo(Long id) {
         vueloRepository.deleteById(id);
     }
+
+    @Override
+    public List<Vuelo> saveAll(List<VueloDTO> vuelos) {
+        return vueloRepository.saveAll(vuelos.stream().map(vueloDTO -> vueloMapper.toEntity(vueloDTO, aerolineaService, aeropuertoService)).collect(Collectors.toList()));
+    }
+
     @Override
     public List<Reserva> findByVuelo(Long id) {
         return vueloRepository.findReservasById(id);

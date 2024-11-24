@@ -29,11 +29,11 @@ public class ReservaController {
         return ResponseEntity.ok(reservaService.findAll());
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<ReservaDTO> obtenerReservaPorId(@PathVariable("id") Long id) {
         return reservaService.findById(id)
                 .map(a -> ResponseEntity.ok().body(a))
-                .orElseThrow(()->new ReservaNotFoundException("No se puede encontrar la reserva con el ID "+id));
+                .orElseThrow(() -> new ReservaNotFoundException("No se puede encontrar la reserva con el ID " + id));
     }
 
     @PostMapping
@@ -41,8 +41,12 @@ public class ReservaController {
         return createReserva(reserva);
     }
 
+    @PostMapping("/saveAll")
+    public ResponseEntity<List<ReservaDTO>> guardarTodos(@RequestBody List<ReservaDTO> reservas) {
+    return ResponseEntity.ok(reservaService.saveAll(reservas));
+    }
 
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     public ResponseEntity<ReservaDTO> actualizarReserva(@PathVariable Long id, @RequestBody ReservaDTO reserva) {
         Optional<ReservaDTO> reservaUpdate = reservaService.updateReserva(id, reserva);
         return reservaUpdate.map(p -> ResponseEntity.ok(p)).orElseGet(() -> {
@@ -56,11 +60,11 @@ public class ReservaController {
         return ResponseEntity.created(location).body(newReserva);
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public ResponseEntity<ReservaDTO> deleteReserva(@PathVariable Long id) {
-        return reservaService.findById(id).map(a-> {
+        return reservaService.findById(id).map(a -> {
             reservaService.deleteReserva(id);
             return ResponseEntity.ok().body(a);
-        }).orElseThrow(()->new ReservaNotFoundException("No se encontró la reserva con el ID "+id));
+        }).orElseThrow(() -> new ReservaNotFoundException("No se encontró la reserva con el ID " + id));
     }
 }

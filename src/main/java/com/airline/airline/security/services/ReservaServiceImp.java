@@ -31,7 +31,7 @@ public class ReservaServiceImp implements ReservaService {
 
     @Override
     public Reserva findReservaById(Long id) {
-        return reservaRepository.findById(id).orElse(null)  ;
+        return reservaRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -39,10 +39,17 @@ public class ReservaServiceImp implements ReservaService {
         return reservaRepository.findAll().stream().map(dto -> reservaMapper.toDTOWithoutId(dto)).collect(Collectors.toList());
     }
 
-
+    @Override
+    public List<ReservaDTO> saveAll(List<ReservaDTO> reservasDto) {
+        List<Reserva> reservas = reservasDto.stream().map(reservaDTO -> reservaMapper.toEntity(reservaDTO, clienteService)).collect(Collectors.toList());
+        return reservaRepository.saveAll(reservas)
+                .stream()
+                .map(dto -> reservaMapper.toDTOWithoutId(dto))
+                .collect(Collectors.toList());
+    }
 
     public Optional<ReservaDTO> updateReserva(Long id, ReservaDTO reserva) {
-        return reservaRepository.findById(id).map(reservaInBD->{
+        return reservaRepository.findById(id).map(reservaInBD -> {
             reservaInBD.setCliente(clienteService.findClienteById(reserva.cliente()).orElse(null));
             reservaInBD.setFechaReserva(reserva.fechaReserva());
             return reservaRepository.save(reservaInBD);
@@ -65,7 +72,6 @@ public class ReservaServiceImp implements ReservaService {
         Reserva reservaEntity = reservaMapper.toEntity(reserva, clienteService);
         return reservaMapper.toDTO(reservaRepository.save(reservaEntity));
     }
-
 
 
 }
