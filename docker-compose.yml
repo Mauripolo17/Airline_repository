@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres
+    container_name: Airline
+    environment:
+      POSTGRES_DB: airline
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - airline_network
+
+networks:
+  airline_network:
+
+volumes:
+  postgres_data:
