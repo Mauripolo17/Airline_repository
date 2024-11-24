@@ -3,6 +3,8 @@ package com.airline.airline.controllers;
 import com.airline.airline.dto.ClienteDTO;
 import com.airline.airline.entities.Cliente;
 import com.airline.airline.exceptions.ClienteNotFoundException;
+import com.airline.airline.exceptions.EmailDuplicatedException;
+import com.airline.airline.exceptions.ExistingUsernameException;
 import com.airline.airline.security.services.ClienteService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -45,7 +47,12 @@ public class ClienteController {
                 .orElseThrow(()->new ClienteNotFoundException("No se pudo encontrar al cliente con el username "+ username));
     }
     @PostMapping
-    public ResponseEntity<ClienteDTO> crearCliente(@RequestBody ClienteDTO cliente) {
+    public ResponseEntity<ClienteDTO> crearCliente(@RequestBody ClienteDTO cliente) throws ExistingUsernameException, EmailDuplicatedException {
+        if (clienteService.findByNombre(cliente.nombre()).isPresent()) {
+            throw new ExistingUsernameException("El numero de usuario "+cliente.username()+"ya existe");
+        }else if(clienteService.findByEmail(cliente.email()).isPresent()){
+            throw  new EmailDuplicatedException("Ya existe un usuario registrado con el email "+cliente.email());
+        }
         return createCliente(cliente);
     }
 
