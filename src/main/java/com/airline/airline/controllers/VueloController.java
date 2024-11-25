@@ -6,19 +6,20 @@ import com.airline.airline.entities.Vuelo;
 import com.airline.airline.exceptions.VueloNotFoundException;
 import com.airline.airline.security.services.VueloService;
 import org.springframework.cache.Cache;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/vuelos")
-@PreAuthorize("hasRole('user')")
-@CrossOrigin("/**")
 public class VueloController {
     private final VueloService vueloService;
 
@@ -53,6 +54,11 @@ public class VueloController {
     @PostMapping("/saveAll")
     public ResponseEntity<List<Vuelo>> guardarTodos(@RequestBody List<VueloDTO> vuelos) {
         return ResponseEntity.ok(vueloService.saveAll(vuelos));
+    }
+
+    @GetMapping("/getVuelos/fecha")
+    public ResponseEntity<List<Vuelo>> obtenerVueloPorId(@RequestParam("fecha") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
+        return ResponseEntity.ok(vueloService.getVuelosPorFecha(fecha));
     }
 
     @PutMapping("/{id}")

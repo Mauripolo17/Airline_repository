@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,4 +18,6 @@ public interface VueloRepository extends JpaRepository<Vuelo, Long> {
     @Query("SELECT DISTINCT v.destino FROM Vuelo v")
     List<String> findCiudadesDestino();
     Optional<Vuelo> findByReservas_Id(Long id);
+    List<Vuelo> findByFechaDeSalida(LocalDate fecha);
+    List<Vuelo> findByFechaDeSalidaBetween(LocalDate startDate, LocalDate endDate);
 }

@@ -9,6 +9,7 @@ import com.airline.airline.entities.Vuelo;
 import com.airline.airline.repositories.VueloRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -89,6 +90,16 @@ public class VueloServiceImp implements VueloService {
     @Override
     public Vuelo findVueloById(Long id) {
         return vueloRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Vuelo> getVuelosPorFecha(LocalDate fecha) {
+        return vueloRepository.findByFechaDeSalida(fecha);
+    }
+
+    @Override
+    public Vuelo findByFecha(LocalDate fecha) {
+        return null;
     }
 
 }

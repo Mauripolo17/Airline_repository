@@ -5,6 +5,8 @@ import com.airline.airline.dto.VueloDTO;
 import com.airline.airline.entities.Reserva;
 import com.airline.airline.entities.Vuelo;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +31,8 @@ public interface VueloService {
     Optional<VueloDTO> findByReserva(Long id, ReservaDTO reserva);
 
     Vuelo findVueloById(Long id);
+    List<Vuelo> getVuelosPorFecha(LocalDate fecha);
 
+    Vuelo findByFecha(LocalDate fecha);
 
 }

@@ -1,5 +1,6 @@
 package com.airline.airline.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,6 +25,7 @@ public class Aeropuerto {
     @Column(nullable = false)
     private String pais;
 
+    @JsonIgnore
     @OneToMany(targetEntity = Vuelo.class, mappedBy = "aeropuerto", fetch = FetchType.LAZY)
     private Set<Vuelo> vuelos;
 }

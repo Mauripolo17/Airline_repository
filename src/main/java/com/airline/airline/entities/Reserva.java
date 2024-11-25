@@ -1,5 +1,6 @@
 package com.airline.airline.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +31,7 @@ public class Reserva {
     @OneToMany(targetEntity = Pasajero.class, mappedBy = "reserva", fetch = FetchType.LAZY)
     private Set<Pasajero> pasajeros;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "RUTAS",
     joinColumns = @JoinColumn(name = "RESERVAS_ID", referencedColumnName = "id"),
