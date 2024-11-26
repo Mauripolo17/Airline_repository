@@ -93,8 +93,8 @@ public class VueloServiceImp implements VueloService {
     }
 
     @Override
-    public List<Vuelo> getVuelosPorFecha(LocalDate fecha) {
-        return vueloRepository.findByFechaDeSalida(fecha);
+    public List<Vuelo> getVuelosPorFechaOrigenYDestino(LocalDate fecha, String destino, String origen) {
+        return vueloRepository.findByFechaDeSalidaAndDestinoAndOrigen(fecha, destino, origen);
     }
 
     @Override

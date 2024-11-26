@@ -56,14 +56,21 @@ public class PasajeroServiceImp implements PasajeroService {
     }
 
     @Override
+    public List<PasajeroDTO> saveAll(List<PasajeroDTO> pasajeros) {
+        List<Pasajero> pasajeroList = pasajeros.stream().map(p->pasajeroMapper.toEntity(p, reservaService)).collect(Collectors.toList());
+        return pasajeroRepository.saveAll(pasajeroList).stream().map(dto -> pasajeroMapper.toDTO(dto)).collect(Collectors.toList());
+    }
+
+    @Override
     public Optional<PasajeroDTO> updatePasajero(Long id, PasajeroDTO newPasajero) {
         return pasajeroRepository.findById(id).
                 map(pasajeroInBD-> {
                     pasajeroInBD.setNombre(newPasajero.nombre());
                     pasajeroInBD.setApellido(newPasajero.apellido());
-                    pasajeroInBD.setFechaDeNacimiento(newPasajero.fechaNacimiento());
+                    pasajeroInBD.setFechaDeNacimiento(newPasajero.fechaDeNacimiento());
                     pasajeroInBD.setTipoDocumento(newPasajero.tipoDocumento());
                     pasajeroInBD.setNumeroDocumento(newPasajero.numeroDocumento());
+                    pasajeroInBD.setSexo(newPasajero.sexo());
                     return pasajeroRepository.save(pasajeroInBD);
                 }).map(pasajeroMapper::toDTO);
     }

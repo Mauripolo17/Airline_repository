@@ -1,6 +1,7 @@
 package com.airline.airline.controllers;
 
 import com.airline.airline.dto.PasajeroDTO;
+import com.airline.airline.dto.ReservaDTO;
 import com.airline.airline.entities.Pasajero;
 import com.airline.airline.exceptions.PasajeroNotFoundException;
 import com.airline.airline.security.services.PasajeroService;
@@ -36,6 +37,10 @@ public class PasajeroController {
                 .orElseThrow(()->new PasajeroNotFoundException("No se puede encontrar al pasajero con el ID "+id));
     }
 
+    @PostMapping("/saveAll")
+    public ResponseEntity<List<PasajeroDTO>> guardarTodos(@RequestBody List<PasajeroDTO> pasajeros) {
+        return ResponseEntity.ok(pasajeroService.saveAll(pasajeros));
+    }
     @PostMapping
     public ResponseEntity<PasajeroDTO> crearPasajero(@RequestBody PasajeroDTO pasajero) {
         return createPasajero(pasajero);

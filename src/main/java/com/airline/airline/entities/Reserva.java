@@ -7,10 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 @Data
@@ -29,7 +26,7 @@ public class Reserva {
     private Cliente cliente;
 
     @OneToMany(targetEntity = Pasajero.class, mappedBy = "reserva", fetch = FetchType.LAZY)
-    private Set<Pasajero> pasajeros;
+    private Set<Pasajero> pasajeros=new HashSet<>() ;
 
     @JsonIgnore
     @ManyToMany

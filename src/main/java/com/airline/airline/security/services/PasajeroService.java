@@ -20,6 +20,7 @@ public interface PasajeroService {
 
     List<PasajeroDTO> findAll();
 
+    List<PasajeroDTO> saveAll(List<PasajeroDTO> pasajeros);
     Optional<PasajeroDTO> updatePasajero(Long id, PasajeroDTO pasajero);
 
 

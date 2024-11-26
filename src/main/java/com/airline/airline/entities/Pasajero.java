@@ -30,8 +30,11 @@ public class Pasajero {
     @Column(nullable = false)
     private Long numeroDocumento;
 
-    @Column(nullable = false) @Temporal(TemporalType.TIMESTAMP) @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(nullable = false)
     private Date fechaDeNacimiento;
+
+    @Column
+    private String sexo;
 
     @ManyToOne(targetEntity = Reserva.class)
     private Reserva reserva;

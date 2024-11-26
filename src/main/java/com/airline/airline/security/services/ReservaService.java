@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface ReservaService {
 
-    Optional<ReservaDTO> findById(Long id);
+    Optional<Reserva> findById(Long id);
 
     List<ReservaDTO> findAll();
 

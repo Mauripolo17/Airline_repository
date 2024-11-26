@@ -31,7 +31,7 @@ public interface VueloService {
     Optional<VueloDTO> findByReserva(Long id, ReservaDTO reserva);
 
     Vuelo findVueloById(Long id);
-    List<Vuelo> getVuelosPorFecha(LocalDate fecha);
+    List<Vuelo> getVuelosPorFechaOrigenYDestino(LocalDate fecha, String destino, String origen);
 
     Vuelo findByFecha(LocalDate fecha);
 

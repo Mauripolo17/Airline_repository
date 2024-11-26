@@ -12,6 +12,5 @@ public record SingupRequest(Long id,
                             Long numeroDocumento,
                             String direccion,
                             Long telefono,
-                            Date fechaDeNacimiento,
-                            Set<String> roles) {
+                            Date fechaDeNacimiento) {
 }

@@ -56,9 +56,12 @@ public class VueloController {
         return ResponseEntity.ok(vueloService.saveAll(vuelos));
     }
 
-    @GetMapping("/getVuelos/fecha")
-    public ResponseEntity<List<Vuelo>> obtenerVueloPorId(@RequestParam("fecha") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
-        return ResponseEntity.ok(vueloService.getVuelosPorFecha(fecha));
+    @GetMapping("/buscarVuelos/{fecha}/{destino}/{origen}")
+//    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    public ResponseEntity<List<Vuelo>> obtenerVueloPorId(@PathVariable("fecha") LocalDate fecha,
+                                                         @PathVariable("destino") String destino,
+                                                         @PathVariable("origen") String origen) {
+        return ResponseEntity.ok(vueloService.getVuelosPorFechaOrigenYDestino(fecha, destino, origen));
     }
 
     @PutMapping("/{id}")

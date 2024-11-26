@@ -1,5 +1,6 @@
 package com.airline.airline.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +23,8 @@ public class Cliente {
     private Long id;
 
     private String username;
-
+    @Column
+    @JsonIgnore
     private String password;
 
     private String email;
@@ -45,6 +47,7 @@ public class Cliente {
     @Column(nullable = true) @Temporal(TemporalType.TIMESTAMP) @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaDeNacimiento;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name="user_id"),
@@ -52,6 +55,7 @@ public class Cliente {
     )
     private Set<Role> roles;
 
+    @JsonIgnore
     @OneToMany(targetEntity = Reserva.class ,mappedBy = "cliente", fetch = FetchType.LAZY)
     private Set<Reserva> reservas;
 

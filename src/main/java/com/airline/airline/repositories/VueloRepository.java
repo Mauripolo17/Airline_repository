@@ -18,6 +18,6 @@ public interface VueloRepository extends JpaRepository<Vuelo, Long> {
     @Query("SELECT DISTINCT v.destino FROM Vuelo v")
     List<String> findCiudadesDestino();
     Optional<Vuelo> findByReservas_Id(Long id);
-    List<Vuelo> findByFechaDeSalida(LocalDate fecha);
+    List<Vuelo> findByFechaDeSalidaAndDestinoAndOrigen(LocalDate fecha, String destino, String origen);
     List<Vuelo> findByFechaDeSalidaBetween(LocalDate startDate, LocalDate endDate);
 }

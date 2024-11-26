@@ -59,7 +59,7 @@ public class WebSecurityConfig {
 //                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/**").permitAll()
 //                        .anyRequest().authenticated()
 //                );
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/**", "/api/vuelos/**").permitAll()
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/**", "/api/vuelos/**", "/api/reservas/**").permitAll()
                         .anyRequest().authenticated()
                 );
         http.authenticationProvider(authenticationProvider());

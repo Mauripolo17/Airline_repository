@@ -1,5 +1,6 @@
 package com.airline.airline.security.services;
 
+import com.airline.airline.dto.PasajeroDTO;
 import com.airline.airline.dto.ReservaDTO;
 import com.airline.airline.dto.ReservaMapper;
 import com.airline.airline.entities.Reserva;
@@ -25,8 +26,9 @@ public class ReservaServiceImp implements ReservaService {
     }
 
     @Override
-    public Optional<ReservaDTO> findById(Long id) {
-        return reservaRepository.findById(id).map(reservaMapper::toDTO);
+    public Optional<Reserva> findById(Long id) {
+        return reservaRepository.findById(id);
+//                .map(reservaMapper::toDTO);
     }
 
     @Override
@@ -44,7 +46,7 @@ public class ReservaServiceImp implements ReservaService {
         List<Reserva> reservas = reservasDto.stream().map(reservaDTO -> reservaMapper.toEntity(reservaDTO, clienteService)).collect(Collectors.toList());
         return reservaRepository.saveAll(reservas)
                 .stream()
-                .map(dto -> reservaMapper.toDTOWithoutId(dto))
+                .map(dto -> reservaMapper.toDTO(dto))
                 .collect(Collectors.toList());
     }
 
@@ -56,7 +58,10 @@ public class ReservaServiceImp implements ReservaService {
         }).map(reservaMapper::toDTO);
     }
 
-
+//
+//    public List<PasajeroDTO> getPasajerosByReservaId(Long id) {
+//        return reservaRepository.findPasajerosByReserva_Id(id).stream().map(p->paasjerp);
+//    }
     @Override
     public void deleteReserva(Long id) {
         reservaRepository.deleteById(id);

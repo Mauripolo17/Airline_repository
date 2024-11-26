@@ -9,6 +9,7 @@ public record PasajeroDTO(Long id,
                           String apellido,
                           String tipoDocumento,
                           Long numeroDocumento,
-                          Date fechaNacimiento,
+                          Date fechaDeNacimiento,
+                          String sexo,
                           Long reserva) {
 }

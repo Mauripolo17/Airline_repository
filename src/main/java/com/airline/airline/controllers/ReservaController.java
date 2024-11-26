@@ -1,6 +1,8 @@
 package com.airline.airline.controllers;
 
+import com.airline.airline.dto.PasajeroDTO;
 import com.airline.airline.dto.ReservaDTO;
+import com.airline.airline.entities.Pasajero;
 import com.airline.airline.entities.Reserva;
 import com.airline.airline.exceptions.ReservaNotFoundException;
 import com.airline.airline.security.services.ReservaService;
@@ -15,7 +17,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/reservas")
-@PreAuthorize("hasRole('user')")
 public class ReservaController {
     private final ReservaService reservaService;
 
@@ -28,9 +29,14 @@ public class ReservaController {
     public ResponseEntity<List<ReservaDTO>> obtenerReserva() {
         return ResponseEntity.ok(reservaService.findAll());
     }
+//
+//    @GetMapping("/pasajeros/{id}")
+//    public ResponseEntity<List<PasajeroDTO>> obtenerReserva(@PathVariable Long id) {
+//
+//    }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ReservaDTO> obtenerReservaPorId(@PathVariable("id") Long id) {
+    public ResponseEntity<Reserva> obtenerReservaPorId(@PathVariable("id") Long id) {
         return reservaService.findById(id)
                 .map(a -> ResponseEntity.ok().body(a))
                 .orElseThrow(() -> new ReservaNotFoundException("No se puede encontrar la reserva con el ID " + id));
@@ -61,7 +67,7 @@ public class ReservaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ReservaDTO> deleteReserva(@PathVariable Long id) {
+    public ResponseEntity<Reserva> deleteReserva(@PathVariable Long id) {
         return reservaService.findById(id).map(a -> {
             reservaService.deleteReserva(id);
             return ResponseEntity.ok().body(a);
